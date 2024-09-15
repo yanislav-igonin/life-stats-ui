@@ -1,7 +1,7 @@
-import * as api from './api-client';
+import { httpClient, httpClientUnauthed } from './httpClient';
 
 type SuccessResponse<T> = {
-  data: T
+  data: T;
   ok: true;
 };
 
@@ -9,7 +9,7 @@ export function auth(authToken?: string) {
   if (!authToken) {
     return Promise.reject(new Error('No auth token provided'));
   }
-  return api.getUnauth('/auth', {
+  return httpClientUnauthed.get('auth', {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },
@@ -23,7 +23,10 @@ export type Sleep = {
   quality: 'very_bad' | 'bad' | 'meh' | 'good' | 'very_good';
 };
 export function getSleeps() {
-  return api.get<SuccessResponse<Sleep[]>>('/sleep').then((response) => {
-    return response.data;
-  });
+  return httpClient
+    .get<SuccessResponse<Sleep[]>>('sleep')
+    .then(async (response) => {
+      const data = await response.json();
+      return data.data;
+    });
 }
