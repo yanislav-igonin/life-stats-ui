@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Sleep, getSleeps } from './api';
-import { formatDate } from './dates';
+import { diffInHours, formatDate, toFixed } from './dates';
 
 export function App() {
   const [sleeps, setSleeps] = useState<Sleep[]>([]);
@@ -15,7 +15,8 @@ export function App() {
     <div>
       {sleeps.map((sleep) => (
         <div key={sleep.id}>
-          {formatDate(sleep.wakeUpAt)} - {formatDate(sleep.goToBedAt)}
+          {formatDate(sleep.goToBedAt)} - {formatDate(sleep.wakeUpAt)} (
+          {toFixed(diffInHours(sleep.wakeUpAt, sleep.goToBedAt), 2)} hours sleep)
         </div>
       ))}
     </div>
