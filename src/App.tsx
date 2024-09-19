@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Sleep, getSleeps } from './api';
-import { diffInHours, formatDate, toFixed } from './dates';
+import { getSleeps } from './api';
+import { RechartChart } from './RechartChart';
+import { Sleep } from './models/sleep.model';
 
 export function App() {
   const [sleeps, setSleeps] = useState<Sleep[]>([]);
   useEffect(() => {
     getSleeps().then((response) => {
-      setSleeps(response);
+      setSleeps(response.map((sleep) => new Sleep(sleep)));
     });
   }, []);
 
   return (
-    <div>
-      {sleeps.map((sleep) => (
-        <div key={sleep.id}>
-          {formatDate(sleep.goToBedAt)} - {formatDate(sleep.wakeUpAt)} (
-          {toFixed(diffInHours(sleep.wakeUpAt, sleep.goToBedAt), 2)} hours sleep)
-        </div>
-      ))}
-    </div>
+    <>
+      <RechartChart data={sleeps} />
+    </>
   );
 }

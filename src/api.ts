@@ -16,7 +16,7 @@ export function auth(authToken?: string) {
   });
 }
 
-export type Sleep = {
+export type SleepData = {
   id: string;
   wakeUpAt: string;
   goToBedAt: string;
@@ -24,7 +24,7 @@ export type Sleep = {
 };
 export function getSleeps() {
   return httpClient
-    .get<SuccessResponse<Sleep[]>>('sleep')
+    .get<SuccessResponse<SleepData[]>>('sleep')
     .then(async (response) => {
       const data = await response.json();
       return data.data;
