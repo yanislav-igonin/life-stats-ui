@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
+// @ts-expect-error - Unused import
 import {
 	NameType,
 	Payload,
