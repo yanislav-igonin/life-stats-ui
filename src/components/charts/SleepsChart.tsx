@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis } from "recharts";
-import { Sleep } from "../../models/sleep.model";
+import type { Sleep } from "../../models/sleep.model";
 
 export function SleepsChart({ data }: { data: Sleep[] }) {
 	return (

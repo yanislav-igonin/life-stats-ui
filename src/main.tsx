@@ -5,7 +5,11 @@ import { App } from "./App.tsx";
 import "./index.css";
 import { Auth } from "./Auth.tsx";
 import { NotFound } from "./404.tsx";
-import { Container } from "./components/Container.tsx";
+
+const root = document.getElementById("root");
+if (!root) {
+	throw new Error("Root element not found");
+}
 
 const router = createBrowserRouter([
 	{
@@ -21,10 +25,8 @@ const router = createBrowserRouter([
 		element: <NotFound />,
 	},
 ]);
-createRoot(document.getElementById("root")!).render(
+createRoot(root).render(
 	<StrictMode>
-		<Container>
-			<RouterProvider router={router} />
-		</Container>
+		<RouterProvider router={router} />
 	</StrictMode>,
 );
