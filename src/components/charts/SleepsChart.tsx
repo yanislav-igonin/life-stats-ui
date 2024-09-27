@@ -1,7 +1,7 @@
 import { BarChart, Bar, CartesianGrid, XAxis } from "recharts";
 import type { Sleep } from "../../models/sleep.model";
 import {
-	ChartConfig,
+	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
