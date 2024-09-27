@@ -24,6 +24,6 @@ export class Sleep {
 	}
 
 	get date() {
-		return DateTime.fromISO(this.wakeUpAt).toFormat("dd/MM/yyyy");
+		return DateTime.fromISO(this.wakeUpAt).toFormat("dd.MM.yyyy");
 	}
 }

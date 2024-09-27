@@ -1,67 +1,36 @@
-import {
-	ResponsiveContainer,
-	BarChart,
-	Bar,
-	XAxis,
-	XAxisProps,
-	YAxisProps,
-	BarProps,
-	YAxis,
-	Tooltip,
-	TooltipProps,
-	DefaultTooltipContentProps,
-} from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis } from "recharts";
 import type { Sleep } from "../../models/sleep.model";
+import {
+	ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+	ChartLegend,
+	ChartLegendContent,
+} from "@/components/ui/chart";
 
-const xAxisProps: XAxisProps = {
-	dataKey: "date",
-	tickLine: false,
-	tickMargin: 10,
-	axisLine: false,
-};
-
-const yAxisProps: YAxisProps = {
-	tickLine: false,
-	tickMargin: 10,
-};
-
-const barProps: BarProps = {
-	dataKey: "hoursSlept",
-	fill: "red",
-};
-
-function CustomTooltip(props: DefaultTooltipContentProps) {
-	const { payload, active } = props;
-
-	if (!active || !payload?.length) {
-		return null;
-	}
-
-	const element = payload[0].payload;
-	return (
-		<div className="bg-white rounded-lg shadow-lg p-4 text-center">
-			<p className="text-sm font-medium text-gray-900">
-				{element.hoursSlept.toFixed(1)} hours slept
-			</p>
-			<p className="text-xs text-gray-500">{element.date}</p>
-		</div>
-	);
-}
-const tooltipProps = {
-	cursor: true,
-	content: <CustomTooltip />,
-};
+const chartConfig = {
+	hoursSlept: {
+		label: "Hours slept ",
+		color: "black",
+	},
+} satisfies ChartConfig;
 
 export function SleepsChart({ data }: { data: Sleep[] }) {
 	return (
-		<ResponsiveContainer maxHeight={500}>
-			<BarChart data={data}>
-				{/* // @ts-expect-error - Strange typings */}
-				<Bar {...barProps} />
-				<XAxis {...xAxisProps} />
-				<YAxis {...yAxisProps} />
-				<Tooltip {...tooltipProps} />
+		<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+			<BarChart accessibilityLayer data={data}>
+				<CartesianGrid vertical={false} />
+				<XAxis
+					dataKey="date"
+					tickLine={false}
+					tickMargin={10}
+					axisLine={false}
+				/>
+				<ChartTooltip content={<ChartTooltipContent />} />
+				<ChartLegend content={<ChartLegendContent />} />
+				<Bar dataKey="hoursSlept" fill="var(--color-hoursSlept)" radius={4} />
 			</BarChart>
-		</ResponsiveContainer>
+		</ChartContainer>
 	);
 }
