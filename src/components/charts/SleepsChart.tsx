@@ -1,4 +1,4 @@
-import { BarChart, Bar, CartesianGrid, XAxis } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts";
 import type { Sleep } from "../../models/sleep.model";
 import {
 	type ChartConfig,
@@ -11,7 +11,7 @@ import {
 
 const chartConfig = {
 	hoursSlept: {
-		label: "Hours slept ",
+		label: "Часов сна",
 		color: "black",
 	},
 } satisfies ChartConfig;
@@ -27,6 +27,7 @@ export function SleepsChart({ data }: { data: Sleep[] }) {
 					tickMargin={10}
 					axisLine={false}
 				/>
+				<YAxis tickLine={false} tickMargin={10} axisLine={false} />
 				<ChartTooltip content={<ChartTooltipContent />} />
 				<ChartLegend content={<ChartLegendContent />} />
 				<Bar dataKey="hoursSlept" fill="var(--color-hoursSlept)" radius={4} />
