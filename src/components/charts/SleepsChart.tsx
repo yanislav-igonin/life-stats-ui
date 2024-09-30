@@ -28,7 +28,7 @@ export function SleepsChart({ data }: { data: Sleep[] }) {
 					axisLine={false}
 				/>
 				<YAxis tickLine={false} tickMargin={10} axisLine={false} />
-				<ChartTooltip content={<ChartTooltipContent />} />
+				<ChartTooltip content={<ChartTooltipContent hideIndicator />} />
 				<ChartLegend content={<ChartLegendContent />} />
 				<Bar dataKey="hoursSlept" fill="var(--color-hoursSlept)" radius={4} />
 			</BarChart>
