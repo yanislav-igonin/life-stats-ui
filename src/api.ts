@@ -1,4 +1,6 @@
+import type { DateRange } from "react-day-picker";
 import { httpClient, httpClientUnauthed } from "./httpClient";
+import { subWeeks } from "date-fns";
 
 type SuccessResponse<T> = {
 	data: T;
@@ -22,9 +24,17 @@ export type SleepData = {
 	goToBedAt: string;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 };
-export function getSleeps() {
+export function getSleeps(dates: DateRange | undefined) {
+	const fromDate =
+		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
+	const toDate = dates?.to?.toISOString() ?? new Date().toISOString();
 	return httpClient
-		.get<SuccessResponse<SleepData[]>>("sleep")
+		.get<SuccessResponse<SleepData[]>>("sleep", {
+			searchParams: {
+				from: fromDate,
+				to: toDate,
+			},
+		})
 		.then(async (response) => {
 			const data = await response.json();
 			return data.data;

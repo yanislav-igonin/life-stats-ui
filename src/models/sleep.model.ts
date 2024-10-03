@@ -1,4 +1,4 @@
-import { diffInHours, formatDate } from "../dates";
+import { diffInHours, formatDate } from "../lib/dates";
 
 export class Sleep {
 	id: string;
@@ -24,5 +24,10 @@ export class Sleep {
 
 	get date() {
 		return formatDate(this.wakeUpAt);
+	}
+
+	static getAverageHoursSlept(sleeps: Sleep[]) {
+		const total = sleeps.reduce((acc, sleep) => acc + sleep.hoursSlept, 0);
+		return total / sleeps.length;
 	}
 }
