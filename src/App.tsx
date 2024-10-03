@@ -7,16 +7,16 @@ import { Container } from "./components/Container";
 import { DatePickerWithRange } from "./components/charts/DatePickerWithRange";
 import type { DateRange } from "react-day-picker";
 import { DateTime } from "luxon";
+import { endOfDay, startOfDay } from "date-fns";
 
 export function App() {
 	const [date, setDate] = useState<DateRange | undefined>({
-		from: DateTime.now().minus({ weeks: 2 }).toJSDate(),
-		to: new Date(),
+		from: startOfDay(DateTime.now().minus({ weeks: 2 }).toJSDate()),
+		to: endOfDay(new Date()),
 	});
 
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 	useEffect(() => {
-		// @ts-expect-error
 		getSleeps(date).then((response) => {
 			setSleeps(response.map((sleep) => new Sleep(sleep)));
 		});

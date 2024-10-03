@@ -24,9 +24,10 @@ export type SleepData = {
 	goToBedAt: string;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 };
-export function getSleeps({ from, to }: DateRange) {
-	const fromDate = from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
-	const toDate = to?.toISOString() ?? new Date().toISOString();
+export function getSleeps(dates: DateRange | undefined) {
+	const fromDate =
+		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
+	const toDate = dates?.to?.toISOString() ?? new Date().toISOString();
 	return httpClient
 		.get<SuccessResponse<SleepData[]>>("sleep", {
 			searchParams: {
