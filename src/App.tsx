@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { getSleeps } from "./api";
 import { SleepsChart } from "./components/charts/SleepsChart";
@@ -13,6 +13,9 @@ export function App() {
 		from: startOfDay(subWeeks(new Date(), 2)),
 		to: endOfDay(new Date()),
 	});
+	const [averageSleepTime, setAverageSleepTime] = useState<number | undefined>(
+		undefined,
+	);
 
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 	useEffect(() => {
@@ -27,10 +30,16 @@ export function App() {
 		});
 	}, [datesFilter]);
 
+	useMemo(() => {
+		const average = Sleep.getAverageHoursSlept(sleeps);
+		setAverageSleepTime(average);
+	}, [sleeps]);
+
 	return (
 		<Container>
 			<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
 			<SleepsChart data={sleeps} />
+			<p>Среднее время сна: {averageSleepTime?.toFixed(1)} часов</p>
 		</Container>
 	);
 }
