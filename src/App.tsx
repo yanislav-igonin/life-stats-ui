@@ -6,25 +6,30 @@ import { Sleep } from "./models/sleep.model";
 import { Container } from "./components/Container";
 import { DatePickerWithRange } from "./components/charts/DatePickerWithRange";
 import type { DateRange } from "react-day-picker";
-import { DateTime } from "luxon";
-import { endOfDay, startOfDay } from "date-fns";
+import { endOfDay, startOfDay, subWeeks } from "date-fns";
 
 export function App() {
-	const [date, setDate] = useState<DateRange | undefined>({
-		from: startOfDay(DateTime.now().minus({ weeks: 2 }).toJSDate()),
+	const [datesFilter, setDatesFilter] = useState<DateRange | undefined>({
+		from: startOfDay(subWeeks(new Date(), 2)),
 		to: endOfDay(new Date()),
 	});
 
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 	useEffect(() => {
-		getSleeps(date).then((response) => {
+		const dates = {
+			from: datesFilter?.from
+				? startOfDay(datesFilter.from)
+				: startOfDay(subWeeks(new Date(), 2)),
+			to: datesFilter?.to ? endOfDay(datesFilter.to) : endOfDay(new Date()),
+		};
+		getSleeps(dates).then((response) => {
 			setSleeps(response.map((sleep) => new Sleep(sleep)));
 		});
-	}, [date]);
+	}, [datesFilter]);
 
 	return (
 		<Container>
-			<DatePickerWithRange date={date} setDate={setDate} />
+			<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
 			<SleepsChart data={sleeps} />
 		</Container>
 	);

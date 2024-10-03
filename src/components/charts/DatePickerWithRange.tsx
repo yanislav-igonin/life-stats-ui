@@ -15,11 +15,11 @@ import {
 
 export function DatePickerWithRange({
 	className,
-	date,
-	setDate,
+	dates: date,
+	setDates: setDate,
 }: React.HTMLAttributes<HTMLDivElement> & {
-	date: DateRange | undefined;
-	setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
+	dates: DateRange | undefined;
+	setDates: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
 }) {
 	return (
 		<div className={cn("grid gap-2", className)}>
