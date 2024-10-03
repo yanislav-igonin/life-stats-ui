@@ -39,7 +39,9 @@ export function App() {
 		<Container>
 			<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
 			<SleepsChart data={sleeps} />
-			<p>Среднее время сна: {averageSleepTime?.toFixed(1)} часов</p>
+			{averageSleepTime ? (
+				<p>Среднее время сна: {averageSleepTime.toFixed(1)} часов</p>
+			) : null}
 		</Container>
 	);
 }
