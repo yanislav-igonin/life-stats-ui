@@ -1,5 +1,4 @@
-import { DateTime } from "luxon";
-import { diffInHours } from "../dates";
+import { diffInHours, formatDate } from "../dates";
 
 export class Sleep {
 	id: string;
@@ -24,6 +23,6 @@ export class Sleep {
 	}
 
 	get date() {
-		return DateTime.fromISO(this.wakeUpAt).toFormat("dd.MM.yyyy");
+		return formatDate(this.wakeUpAt);
 	}
 }
