@@ -1,4 +1,4 @@
-import { diffInHours, formatDate } from "../dates";
+import { diffInHours, formatDate } from "../lib/dates";
 
 export class Sleep {
 	id: string;
