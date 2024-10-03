@@ -25,4 +25,9 @@ export class Sleep {
 	get date() {
 		return formatDate(this.wakeUpAt);
 	}
+
+	static getAverageHoursSlept(sleeps: Sleep[]) {
+		const total = sleeps.reduce((acc, sleep) => acc + sleep.hoursSlept, 0);
+		return total / sleeps.length;
+	}
 }
