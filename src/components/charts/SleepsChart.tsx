@@ -43,6 +43,7 @@ export function SleepsChart({ data }: { data: Sleep[] }) {
 					<Bar dataKey="hoursSlept" fill="var(--color-hoursSlept)" radius={4} />
 				</BarChart>
 			</ChartContainer>
+
 			{averageSleepTime ? (
 				<p>Среднее время сна: {averageSleepTime.toFixed(1)} часов</p>
 			) : null}

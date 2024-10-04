@@ -20,4 +20,9 @@ export class SleepQuality {
 	get qualityNumber() {
 		return this.qualityMap[this.quality];
 	}
+
+	static getAverageSleepQuality(sleeps: SleepQuality[]) {
+		const total = sleeps.reduce((acc, sleep) => acc + sleep.qualityNumber, 0);
+		return total / sleeps.length;
+	}
 }

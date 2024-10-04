@@ -20,4 +20,9 @@ export class MoodForDay {
 	get moodNumber() {
 		return this.moodMap[this.mood];
 	}
+
+	static getAverageMoodForDay(sleeps: MoodForDay[]) {
+		const total = sleeps.reduce((acc, sleep) => acc + sleep.moodNumber, 0);
+		return total / sleeps.length;
+	}
 }
