@@ -7,7 +7,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
-import { MoodForDay } from "@/models/moodForDay.model";
+import { MoodOfDay } from "@/models/moodOfDay.model";
 import { basicChartConfig } from "./basicChartConfig";
 import { useState, useMemo } from "react";
 
@@ -18,10 +18,10 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export function MoodForDayChart({ data }: { data: MoodForDay[] }) {
+export function MoodForDayChart({ data }: { data: MoodOfDay[] }) {
 	const [average, setAverage] = useState<number | undefined>(undefined);
 	useMemo(() => {
-		setAverage(MoodForDay.getAverageMoodForDay(data));
+		setAverage(MoodOfDay.getAverageMoodOfDay(data));
 	}, [data]);
 
 	return (

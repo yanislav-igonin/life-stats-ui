@@ -10,7 +10,7 @@ import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { SleepQuality } from "./models/sleepQuality.model";
 import { SleepQualityChart } from "./components/charts/SleepQualityChart";
 import { MoodForDayChart } from "./components/charts/MoodForDayChart";
-import { MoodForDay } from "./models/moodForDay.model";
+import { MoodOfDay } from "./models/moodOfDay.model";
 
 export function App() {
 	const [datesFilter, setDatesFilter] = useState<DateRange | undefined>({
@@ -19,7 +19,7 @@ export function App() {
 	});
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 	const [sleepQualities, setSleepQualities] = useState<SleepQuality[]>([]);
-	const [moodForDays, setMoodForDays] = useState<MoodForDay[]>([]);
+	const [moodForDays, setMoodForDays] = useState<MoodOfDay[]>([]);
 
 	useEffect(() => {
 		const dates = {
@@ -33,7 +33,7 @@ export function App() {
 			const sleepQualitiesData = sleepsData.map(
 				(sleep) => new SleepQuality(sleep),
 			);
-			const moodForDaysData = sleepsData.map((sleep) => new MoodForDay(sleep));
+			const moodForDaysData = sleepsData.map((sleep) => new MoodOfDay(sleep));
 			setSleeps(sleepsData);
 			setSleepQualities(sleepQualitiesData);
 			setMoodForDays(moodForDaysData);

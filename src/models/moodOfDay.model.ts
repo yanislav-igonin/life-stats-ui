@@ -1,6 +1,6 @@
 import type { Sleep } from "./sleep.model";
 
-export class MoodForDay {
+export class MoodOfDay {
 	date: string;
 	mood: "very_bad" | "bad" | "meh" | "good" | "very_good";
 
@@ -21,7 +21,7 @@ export class MoodForDay {
 		return this.moodMap[this.mood];
 	}
 
-	static getAverageMoodForDay(sleeps: MoodForDay[]) {
+	static getAverageMoodOfDay(sleeps: MoodOfDay[]) {
 		const total = sleeps.reduce((acc, sleep) => acc + sleep.moodNumber, 0);
 		return total / sleeps.length;
 	}
