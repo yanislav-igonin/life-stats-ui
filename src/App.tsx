@@ -7,10 +7,6 @@ import { Container } from "./components/Container";
 import { DatePickerWithRange } from "./components/DatePickerWithRange";
 import type { DateRange } from "react-day-picker";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
-import { SleepQuality } from "./models/sleepQuality.model";
-import { SleepQualityChart } from "./components/charts/SleepQualityChart";
-import { MoodForDayChart } from "./components/charts/MoodForDayChart";
-import { MoodOfDay } from "./models/moodOfDay.model";
 
 export function App() {
 	const [datesFilter, setDatesFilter] = useState<DateRange | undefined>({
@@ -18,8 +14,6 @@ export function App() {
 		to: endOfDay(new Date()),
 	});
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
-	const [sleepQualities, setSleepQualities] = useState<SleepQuality[]>([]);
-	const [moodForDays, setMoodForDays] = useState<MoodOfDay[]>([]);
 
 	useEffect(() => {
 		const dates = {
@@ -30,13 +24,7 @@ export function App() {
 		};
 		getSleeps(dates).then((response) => {
 			const sleepsData = response.map((sleep) => new Sleep(sleep));
-			const sleepQualitiesData = sleepsData.map(
-				(sleep) => new SleepQuality(sleep),
-			);
-			const moodForDaysData = sleepsData.map((sleep) => new MoodOfDay(sleep));
 			setSleeps(sleepsData);
-			setSleepQualities(sleepQualitiesData);
-			setMoodForDays(moodForDaysData);
 		});
 	}, [datesFilter]);
 
@@ -44,9 +32,7 @@ export function App() {
 		<Container>
 			<div className="flex flex-col gap-5">
 				<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
-				<SleepsChart data={sleeps} />
-				<SleepQualityChart data={sleepQualities} />
-				<MoodForDayChart data={moodForDays} />
+				<SleepsChart sleeps={sleeps} />
 			</div>
 		</Container>
 	);
