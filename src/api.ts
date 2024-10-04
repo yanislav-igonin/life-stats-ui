@@ -23,6 +23,7 @@ export type SleepData = {
 	wakeUpAt: string;
 	goToBedAt: string;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
+	moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
 };
 export function getSleeps(dates: DateRange | undefined) {
 	const fromDate =
