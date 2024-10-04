@@ -19,13 +19,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function SleepsChart({ data }: { data: Sleep[] }) {
-	const [averageSleepTime, setAverageSleepTime] = useState<number | undefined>(
-		undefined,
-	);
+	const [average, setAverage] = useState<number | undefined>(undefined);
 	useMemo(() => {
-		const average = Sleep.getAverageHoursSlept(data);
-		setAverageSleepTime(average);
+		setAverage(Sleep.getAverageHoursSlept(data));
 	}, [data]);
+
 	return (
 		<div>
 			<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
@@ -44,9 +42,7 @@ export function SleepsChart({ data }: { data: Sleep[] }) {
 				</BarChart>
 			</ChartContainer>
 
-			{averageSleepTime ? (
-				<p>Среднее время сна: {averageSleepTime.toFixed(1)} часов</p>
-			) : null}
+			{average ? <p>Среднее время сна: {average.toFixed(1)} часов</p> : null}
 		</div>
 	);
 }

@@ -19,12 +19,9 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function SleepQualityChart({ data }: { data: SleepQuality[] }) {
-	const [averageSleepQuality, setAverageSleepQuality] = useState<
-		number | undefined
-	>(undefined);
+	const [average, setAverage] = useState<number | undefined>(undefined);
 	useMemo(() => {
-		const average = SleepQuality.getAverageSleepQuality(data);
-		setAverageSleepQuality(average);
+		setAverage(SleepQuality.getAverageSleepQuality(data));
 	}, [data]);
 
 	return (
@@ -54,9 +51,7 @@ export function SleepQualityChart({ data }: { data: SleepQuality[] }) {
 				</BarChart>
 			</ChartContainer>
 
-			{averageSleepQuality ? (
-				<p>Среднее качество сна: {averageSleepQuality.toFixed(1)}</p>
-			) : null}
+			{average ? <p>Среднее качество сна: {average.toFixed(1)}</p> : null}
 		</div>
 	);
 }

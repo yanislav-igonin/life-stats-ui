@@ -19,13 +19,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function MoodForDayChart({ data }: { data: MoodForDay[] }) {
-	const [averageMoodForDay, setAverageMoodForDay] = useState<
-		number | undefined
-	>(undefined);
+	const [average, setAverage] = useState<number | undefined>(undefined);
 	useMemo(() => {
-		const average = MoodForDay.getAverageMoodForDay(data);
-		setAverageMoodForDay(average);
+		setAverage(MoodForDay.getAverageMoodForDay(data));
 	}, [data]);
+
 	return (
 		<div>
 			<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
@@ -49,9 +47,7 @@ export function MoodForDayChart({ data }: { data: MoodForDay[] }) {
 				</BarChart>
 			</ChartContainer>
 
-			{averageMoodForDay ? (
-				<p>Среднее настроение за день: {averageMoodForDay.toFixed(1)}</p>
-			) : null}
+			{average ? <p>Среднее настроение за день: {average.toFixed(1)}</p> : null}
 		</div>
 	);
 }
