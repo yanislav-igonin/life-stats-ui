@@ -8,11 +8,12 @@ import {
 	ChartLegendContent,
 } from "@/components/ui/chart";
 import type { MoodForDay } from "@/models/moodForDay.model";
+import { basicChartConfig } from "./basicChartConfig";
 
 const chartConfig = {
-	qualityNumber: {
+	moodNumber: {
 		label: "Качество сна",
-		color: "black",
+		...basicChartConfig,
 	},
 } satisfies ChartConfig;
 
@@ -35,7 +36,7 @@ export function MoodForDayChart({ data }: { data: MoodForDay[] }) {
 				/>
 				<ChartTooltip content={<ChartTooltipContent hideIndicator />} />
 				<ChartLegend content={<ChartLegendContent />} />
-				<Bar dataKey="moodNumber" fill="var(--color-hoursSlept)" radius={4} />
+				<Bar dataKey="moodNumber" fill="var(--color-moodNumber)" radius={4} />
 			</BarChart>
 		</ChartContainer>
 	);

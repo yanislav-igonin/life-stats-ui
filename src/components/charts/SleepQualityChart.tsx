@@ -8,11 +8,12 @@ import {
 	ChartLegendContent,
 } from "@/components/ui/chart";
 import type { SleepQuality } from "@/models/sleepQuality.model";
+import { basicChartConfig } from "./basicChartConfig";
 
 const chartConfig = {
 	qualityNumber: {
 		label: "Качество сна",
-		color: "black",
+		...basicChartConfig,
 	},
 } satisfies ChartConfig;
 
@@ -37,7 +38,7 @@ export function SleepQualityChart({ data }: { data: SleepQuality[] }) {
 				<ChartLegend content={<ChartLegendContent />} />
 				<Bar
 					dataKey="qualityNumber"
-					fill="var(--color-hoursSlept)"
+					fill="var(--color-qualityNumber)"
 					radius={4}
 				/>
 			</BarChart>

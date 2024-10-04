@@ -9,11 +9,12 @@ import {
 	ChartLegendContent,
 } from "@/components/ui/chart";
 import { useState, useMemo } from "react";
+import { basicChartConfig } from "./basicChartConfig";
 
 const chartConfig = {
 	hoursSlept: {
 		label: "Часов сна",
-		color: "black",
+		...basicChartConfig,
 	},
 } satisfies ChartConfig;
 
