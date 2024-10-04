@@ -1,8 +1,10 @@
+import type { Sleep } from "./sleep.model";
+
 export class SleepQuality {
 	date: string;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 
-	private readonly moodMap = {
+	private readonly qualityMap = {
 		very_bad: 1,
 		bad: 2,
 		meh: 3,
@@ -10,15 +12,12 @@ export class SleepQuality {
 		very_good: 5,
 	};
 
-	constructor(data: {
-		date: string;
-		quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
-	}) {
+	constructor(data: Sleep) {
 		this.date = data.date;
 		this.quality = data.quality;
 	}
 
 	get qualityNumber() {
-		return this.moodMap[this.quality];
+		return this.qualityMap[this.quality];
 	}
 }

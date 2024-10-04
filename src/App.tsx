@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { getSleeps } from "./api";
 import { SleepsChart } from "./components/charts/SleepsChart";
@@ -7,8 +7,10 @@ import { Container } from "./components/Container";
 import { DatePickerWithRange } from "./components/DatePickerWithRange";
 import type { DateRange } from "react-day-picker";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
-import { SleepQuality } from "./models/dayMood.model";
+import { SleepQuality } from "./models/sleepQuality.model";
 import { SleepQualityChart } from "./components/charts/SleepQualityChart";
+import { MoodForDayChart } from "./components/charts/MoodForDayChart";
+import { MoodForDay } from "./models/moodForDay.model";
 
 export function App() {
 	const [datesFilter, setDatesFilter] = useState<DateRange | undefined>({
@@ -17,6 +19,7 @@ export function App() {
 	});
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 	const [sleepQualities, setSleepQualities] = useState<SleepQuality[]>([]);
+	const [moodForDays, setMoodForDays] = useState<MoodForDay[]>([]);
 
 	useEffect(() => {
 		const dates = {
@@ -30,8 +33,10 @@ export function App() {
 			const sleepQualitiesData = sleepsData.map(
 				(sleep) => new SleepQuality(sleep),
 			);
+			const moodForDaysData = sleepsData.map((sleep) => new MoodForDay(sleep));
 			setSleeps(sleepsData);
 			setSleepQualities(sleepQualitiesData);
+			setMoodForDays(moodForDaysData);
 		});
 	}, [datesFilter]);
 
@@ -41,6 +46,7 @@ export function App() {
 				<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
 				<SleepsChart data={sleeps} />
 				<SleepQualityChart data={sleepQualities} />
+				<MoodForDayChart data={moodForDays} />
 			</div>
 		</Container>
 	);

@@ -7,7 +7,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
-import type { SleepQuality } from "@/models/sleepQuality.model";
+import type { MoodForDay } from "@/models/moodForDay.model";
 
 const chartConfig = {
 	qualityNumber: {
@@ -16,7 +16,7 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export function SleepQualityChart({ data }: { data: SleepQuality[] }) {
+export function MoodForDayChart({ data }: { data: MoodForDay[] }) {
 	return (
 		<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
 			<BarChart accessibilityLayer data={data}>
@@ -35,11 +35,7 @@ export function SleepQualityChart({ data }: { data: SleepQuality[] }) {
 				/>
 				<ChartTooltip content={<ChartTooltipContent hideIndicator />} />
 				<ChartLegend content={<ChartLegendContent />} />
-				<Bar
-					dataKey="qualityNumber"
-					fill="var(--color-hoursSlept)"
-					radius={4}
-				/>
+				<Bar dataKey="moodNumber" fill="var(--color-hoursSlept)" radius={4} />
 			</BarChart>
 		</ChartContainer>
 	);
