@@ -5,6 +5,7 @@ import { App } from "./App.tsx";
 import "./index.css";
 import { Auth } from "./Auth.tsx";
 import { NotFound } from "./404.tsx";
+import { SleepForm } from "./SleepForm.tsx";
 
 const root = document.getElementById("root");
 if (!root) {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <App />,
 	},
+	{ path: "/sleep/:id", element: <SleepForm /> },
 	{
 		path: "/auth/:authToken",
 		element: <Auth />,

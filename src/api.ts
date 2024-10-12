@@ -1,6 +1,7 @@
 import type { DateRange } from "react-day-picker";
 import { httpClient, httpClientUnauthed } from "./httpClient";
 import { subWeeks } from "date-fns";
+import type { Sleep } from "./models/sleep.model";
 
 type SuccessResponse<T> = {
 	data: T;
@@ -35,6 +36,33 @@ export function getSleeps(dates: DateRange | undefined) {
 				from: fromDate,
 				to: toDate,
 			},
+		})
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export function getSleep(id: number) {
+	return httpClient
+		.get<SuccessResponse<SleepData>>(`sleep/${id}`)
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export function saveSleep(sleep: Sleep) {
+	const body = {
+		id: sleep.id,
+		wakeUpAt: sleep.wakeUpAt,
+		goToBedAt: sleep.goToBedAt,
+		quality: sleep.quality,
+		moodOfDay: sleep.moodOfDay,
+	};
+	return httpClient
+		.post<SuccessResponse<SleepData>>("sleep", {
+			json: body,
 		})
 		.then(async (response) => {
 			const data = await response.json();

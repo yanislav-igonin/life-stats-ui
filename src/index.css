@@ -9,7 +9,7 @@ body {
 }
 
 @layer base {
-  :root {
+	:root {
 		--background: 0 0% 100%;
 		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
@@ -36,7 +36,8 @@ body {
 		--chart-5: 27 87% 67%;
 		--radius: 0.5rem;
 	}
-  .dark {
+
+	.dark {
 		--background: 240 10% 3.9%;
 		--foreground: 0 0% 98%;
 		--card: 240 10% 3.9%;
@@ -65,10 +66,35 @@ body {
 }
 
 @layer base {
-  * {
-    @apply border-border;
+	* {
+		@apply border-border;
 	}
-  body {
-    @apply bg-background text-foreground;
+
+	body {
+		@apply bg-background text-foreground;
 	}
+}
+
+h1 {
+	@apply text-2xl font-bold;
+}
+
+h2 {
+	@apply text-xl font-bold;
+}
+
+h3 {
+	@apply text-lg font-bold;
+}
+
+h4 {
+	@apply text-base font-bold;
+}
+
+h5 {
+	@apply text-sm font-bold;
+}
+
+h6 {
+	@apply text-xs font-bold;
 }

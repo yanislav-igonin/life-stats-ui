@@ -23,6 +23,22 @@ export class Sleep {
 		very_good: 5,
 	};
 
+	readonly qualityEmojiMap = {
+		very_bad: "😡",
+		bad: "😠",
+		meh: "🤨",
+		good: "😌",
+		very_good: "🥹",
+	};
+
+	readonly moodEmojiMap = {
+		very_bad: "😡",
+		bad: "😠",
+		meh: "🤨",
+		good: "😌",
+		very_good: "🥹",
+	};
+
 	constructor(data: {
 		id: string;
 		wakeUpAt: string;
@@ -54,6 +70,14 @@ export class Sleep {
 
 	get moodNumber() {
 		return this.moodMap[this.moodOfDay];
+	}
+
+	get qualityEmoji() {
+		return this.qualityEmojiMap[this.quality];
+	}
+
+	get moodEmoji() {
+		return this.moodEmojiMap[this.moodOfDay];
 	}
 
 	static getAverageHoursSlept(sleeps: Sleep[]) {
