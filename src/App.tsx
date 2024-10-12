@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { getSleeps } from "./api";
 import { SleepsChart } from "./components/charts/SleepsChart";
@@ -23,6 +23,12 @@ export function App() {
 	});
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 
+	const reversedSleeps = useMemo(() => {
+		const copy = JSON.parse(JSON.stringify(sleeps)) as Sleep[];
+		const reversed = copy.map((data) => new Sleep(data)).reverse();
+		return reversed;
+	}, [sleeps]);
+
 	useEffect(() => {
 		const dates = {
 			from: datesFilter?.from
@@ -38,6 +44,8 @@ export function App() {
 			setSleeps(sleepsData);
 		});
 	}, [datesFilter]);
+
+	console.log(reversedSleeps);
 
 	return (
 		<Container>
@@ -55,7 +63,7 @@ export function App() {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{sleeps.map((sleep) => (
+						{reversedSleeps.map((sleep) => (
 							<TableRow key={sleep.id}>
 								<TableCell>{sleep.date}</TableCell>
 								<TableCell>{sleep.qualityEmoji}</TableCell>
