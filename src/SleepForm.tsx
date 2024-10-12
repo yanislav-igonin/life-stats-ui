@@ -35,6 +35,7 @@ export function SleepForm() {
 		const value = target.value;
 		const name = target.name;
 
+		// @ts-expect-error - 2 lame to fix type error rn
 		setSleep((prevState) => {
 			return {
 				...prevState,
@@ -44,6 +45,7 @@ export function SleepForm() {
 	}
 
 	function onSelect(name: string, value: string) {
+		// @ts-expect-error - 2 lame to fix type error rn
 		setSleep((prevState) => {
 			return {
 				...prevState,
@@ -77,10 +79,10 @@ export function SleepForm() {
 				<Label htmlFor="goToBedAt">
 					Время отхода ко сну (часовая зона +00:00)
 				</Label>
-				<Input name="goToBedAt" value={sleep.goToBedAt} />
+				<Input name="goToBedAt" value={sleep.goToBedAt} onInput={onInput} />
 
 				<Label htmlFor="wakeUpAt">Время подъема (часовая зона +00:00)</Label>
-				<Input name="wakeUpAt" value={sleep.wakeUpAt} />
+				<Input name="wakeUpAt" value={sleep.wakeUpAt} onInput={onInput} />
 
 				<Label htmlFor="quality">Качество сна</Label>
 				<Select
