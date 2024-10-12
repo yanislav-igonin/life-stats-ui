@@ -21,7 +21,8 @@ export function SleepForm() {
 
 	const sleepId = useParams().id;
 	if (!sleepId) {
-		return navigate("/");
+		navigate("/");
+		return null;
 	}
 
 	useEffect(() => {
