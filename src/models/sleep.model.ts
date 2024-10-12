@@ -42,6 +42,9 @@ export class Sleep {
 	}
 
 	get date() {
+		if (!this.wakeUpAt) {
+			return "";
+		}
 		return formatDate(this.wakeUpAt);
 	}
 

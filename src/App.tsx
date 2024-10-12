@@ -23,7 +23,9 @@ export function App() {
 			to: datesFilter?.to ? endOfDay(datesFilter.to) : endOfDay(new Date()),
 		};
 		getSleeps(dates).then((response) => {
-			const sleepsData = response.map((sleep) => new Sleep(sleep));
+			const sleepsData = response.map((sleep) => new Sleep(sleep)).filter(
+				({hoursSlept, date}) => hoursSlept > 0 && date,
+			);
 			setSleeps(sleepsData);
 		});
 	}, [datesFilter]);
