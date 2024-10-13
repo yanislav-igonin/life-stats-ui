@@ -1,11 +1,10 @@
+import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { getSleeps } from "./api";
 import { SleepsChart } from "./components/charts/SleepsChart";
 import { Sleep } from "./models/sleep.model";
 import { Container } from "./components/Container";
-import { DatePickerWithRange } from "./components/DatePickerWithRange";
-import type { DateRange } from "react-day-picker";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
 import {
@@ -17,10 +16,10 @@ import {
 } from "./components/ui/table";
 
 export function App() {
-	const [datesFilter, setDatesFilter] = useState<DateRange | undefined>({
-		from: startOfDay(subWeeks(new Date(), 2)),
-		to: endOfDay(new Date()),
-	});
+	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
+		startOfDay(subWeeks(new Date(), 2)),
+		endOfDay(new Date()),
+	]);
 	const [sleeps, setSleeps] = useState<Sleep[]>([]);
 
 	const reversedSleeps = useMemo(() => {
@@ -31,10 +30,10 @@ export function App() {
 
 	useEffect(() => {
 		const dates = {
-			from: datesFilter?.from
-				? startOfDay(datesFilter.from)
+			from: datesFilter[0]
+				? startOfDay(datesFilter[0])
 				: startOfDay(subWeeks(new Date(), 2)),
-			to: datesFilter?.to ? endOfDay(datesFilter.to) : endOfDay(new Date()),
+			to: datesFilter[1] ? endOfDay(datesFilter[1]) : endOfDay(new Date()),
 		};
 		getSleeps(dates).then((response) => {
 			const sleepsData = response
@@ -50,7 +49,15 @@ export function App() {
 	return (
 		<Container>
 			<div className="flex flex-col gap-5">
-				<DatePickerWithRange dates={datesFilter} setDates={setDatesFilter} />
+				<div className="md:w-1/3">
+					<DatePickerInput
+						type="range"
+						allowSingleDateInRange
+						value={datesFilter}
+						onChange={setDatesFilter}
+						numberOfColumns={2}
+					/>
+				</div>
 				<SleepsChart sleeps={sleeps} />
 				<Table>
 					<TableHeader>
