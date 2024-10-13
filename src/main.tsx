@@ -1,6 +1,11 @@
+import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/form/styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createTheme, MantineProvider } from "@mantine/core";
 import { App } from "./App.tsx";
 import "./index.css";
 import { Auth } from "./Auth.tsx";
@@ -11,6 +16,10 @@ const root = document.getElementById("root");
 if (!root) {
 	throw new Error("Root element not found");
 }
+
+const theme = createTheme({
+	/** Put your mantine theme override here */
+});
 
 const router = createBrowserRouter([
 	{
@@ -29,6 +38,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(root).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<MantineProvider theme={theme}>
+			<RouterProvider router={router} />
+		</MantineProvider>
 	</StrictMode>,
 );
