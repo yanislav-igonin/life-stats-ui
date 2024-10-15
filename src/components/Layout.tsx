@@ -4,6 +4,15 @@ import { useDisclosure } from "@mantine/hooks";
 export function Layout({ children }: React.PropsWithChildren) {
 	const [opened, { toggle }] = useDisclosure();
 
+	const authToken = useAuth();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!authToken) {
+			navigate("/auth");
+		}
+	},
+
 	return (
 		<AppShell
 			header={{ height: 60 }}

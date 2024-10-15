@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "./index.css";
 import { Auth } from "./pages/Auth.tsx";
-import { NotFound } from "./404.tsx";
+import { NotFound } from "./pages/404.tsx";
 import { SleepList } from "./pages/SleepList.tsx";
 import { SleepForm } from "./pages/SleepForm.tsx";
 import { Layout } from "./components/Layout.tsx";
