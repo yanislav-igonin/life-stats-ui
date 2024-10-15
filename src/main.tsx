@@ -22,10 +22,12 @@ const theme = createTheme({
 });
 
 const router = createBrowserRouter([
-	{ path: "/sleep/:id", element: <SleepForm /> },
 	{
-		path: "/sleep/list",
-		element: <SleepList />,
+		path: "/sleep",
+		children: [
+			{ path: "list", element: <SleepList /> },
+			{ path: ":id", element: <SleepForm /> },
+		],
 	},
 	{
 		path: "/auth/:authToken",
