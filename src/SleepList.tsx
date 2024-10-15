@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
 import "./App.css";
+import { useEffect, useMemo, useState } from "react";
 import { getSleeps } from "./api";
-import { SleepsChart } from "./components/charts/SleepsChart";
+// import { SleepsChart } from "./components/charts/SleepsChart";
 import { Sleep } from "./models/sleep.model";
 import { Container } from "./components/Container";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
@@ -15,7 +15,7 @@ import {
 	TableRow,
 } from "./components/ui/Table";
 
-export function App() {
+export function SleepList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
 		startOfDay(subWeeks(new Date(), 2)),
 		endOfDay(new Date()),
@@ -56,7 +56,7 @@ export function App() {
 						numberOfColumns={2}
 					/>
 				</div>
-				<SleepsChart sleeps={sleeps} />
+				{/* <SleepsChart sleeps={sleeps} /> */}
 				<Table>
 					<TableHead>
 						<TableRow>

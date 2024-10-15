@@ -5,10 +5,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createTheme, MantineProvider } from "@mantine/core";
-import { App } from "./App.tsx";
 import "./index.css";
 import { Auth } from "./Auth.tsx";
 import { NotFound } from "./404.tsx";
+import { SleepList } from "./SleepList.tsx";
 import { SleepForm } from "./SleepForm.tsx";
 
 const root = document.getElementById("root");
@@ -23,7 +23,7 @@ const theme = createTheme({
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <App />,
+		element: <SleepList />,
 	},
 	{ path: "/sleep/:id", element: <SleepForm /> },
 	{
