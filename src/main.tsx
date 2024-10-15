@@ -12,9 +12,7 @@ if (!root) {
 	throw new Error("Root element not found");
 }
 
-const theme = createTheme({
-	/** Put your mantine theme override here */
-});
+const theme = createTheme({});
 
 createRoot(root).render(
 	<StrictMode>
