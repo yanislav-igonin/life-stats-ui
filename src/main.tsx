@@ -34,11 +34,11 @@ const router = createBrowserRouter([
 					{ path: ":id", element: <SleepForm /> },
 				],
 			},
-			{
-				path: "auth/:authToken",
-				element: <Auth />,
-			},
 		],
+	},
+	{
+		path: "auth/:authToken",
+		element: <Auth />,
 	},
 	{
 		path: "404",
