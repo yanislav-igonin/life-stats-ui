@@ -13,6 +13,7 @@ import {
 	TableHead,
 	TableRow,
 } from "@/components/ui/Table";
+import { IconEdit } from "@tabler/icons-react";
 
 export function SleepList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
@@ -71,7 +72,9 @@ export function SleepList() {
 							<TableCell>{sleep.moodEmoji}</TableCell>
 							<TableCell>{sleep.hoursSlept}</TableCell>
 							<TableCell>
-								<Link to={`/sleep/${sleep.id}`}>Изменить</Link>
+								<Link to={`/sleep/${sleep.id}`}>
+									<IconEdit size={20} />
+								</Link>
 							</TableCell>
 						</TableRow>
 					))}
