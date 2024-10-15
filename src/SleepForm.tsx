@@ -2,17 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSleep, saveSleep } from "./api";
 import { Sleep } from "./models/sleep.model";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "./components/ui/select";
-import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/Input";
+import { Select } from "./components/ui/Select";
+import { Button } from "./components/ui/Button";
 import { Container } from "./components/Container";
 
 export function SleepForm() {
@@ -74,56 +66,43 @@ export function SleepForm() {
 			<h1 className="mb-5">Изменить запись сна</h1>
 
 			<form onSubmit={handleSubmit} className="flex flex-col gap-3 md:w-2/4">
-				<Label htmlFor="id">ID</Label>
-				<Input name="id" value={sleep.id} disabled />
+				<Input label="ID" name="id" value={sleep.id} disabled />
 
-				<Label htmlFor="goToBedAt">
-					Время отхода ко сну (часовая зона +00:00)
-				</Label>
-				<Input name="goToBedAt" value={sleep.goToBedAt} onInput={onInput} />
+				<Input
+					label="Время отхода ко сну (часовая зона +00:00)"
+					name="goToBedAt"
+					value={sleep.goToBedAt}
+					onInput={onInput}
+				/>
 
-				<Label htmlFor="wakeUpAt">Время подъема (часовая зона +00:00)</Label>
-				<Input name="wakeUpAt" value={sleep.wakeUpAt} onInput={onInput} />
+				<Input
+					label="Время подъема (часовая зона +00:00)"
+					name="wakeUpAt"
+					value={sleep.wakeUpAt}
+					onInput={onInput}
+				/>
 
-				<Label htmlFor="quality">Качество сна</Label>
 				<Select
+					label="Качество сна"
 					name="quality"
 					value={sleep.quality}
-					onValueChange={(value) => onSelect("quality", value)}
-				>
-					<SelectTrigger>
-						<SelectValue placeholder="Выбери качество сна" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectGroup>
-							{Object.entries(sleep.qualityEmojiMap).map(([key, value]) => (
-								<SelectItem key={key} value={key}>
-									{value}
-								</SelectItem>
-							))}
-						</SelectGroup>
-					</SelectContent>
-				</Select>
+					data={Object.entries(sleep.qualityEmojiMap).map(([key, value]) => ({
+						value: key,
+						label: value,
+					}))}
+					onChange={(event) => onSelect("quality", event.currentTarget.value)}
+				/>
 
-				<Label htmlFor="moodOfDay">Настроение за день</Label>
 				<Select
+					label="Настроение за день"
 					name="moodOfDay"
 					value={sleep.moodOfDay}
-					onValueChange={(value) => onSelect("moodOfDay", value)}
-				>
-					<SelectTrigger>
-						<SelectValue placeholder="Выбери настроение" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectGroup>
-							{Object.entries(sleep.moodEmojiMap).map(([key, value]) => (
-								<SelectItem key={key} value={key}>
-									{value}
-								</SelectItem>
-							))}
-						</SelectGroup>
-					</SelectContent>
-				</Select>
+					data={Object.entries(sleep.moodEmojiMap).map(([key, value]) => ({
+						value: key,
+						label: value,
+					}))}
+					onChange={(event) => onSelect("moodOfDay", event.currentTarget.value)}
+				/>
 
 				<Button type="submit" className="mt-5">
 					Сохранить
