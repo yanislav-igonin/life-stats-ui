@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { auth } from "./api";
+import { auth } from "../api";
 
 export function Auth() {
 	const authToken = useParams().authToken;
