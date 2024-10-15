@@ -47,7 +47,9 @@ export function Layout() {
 			</AppShell.Header>
 			<AppShell.Navbar p="md">a</AppShell.Navbar>
 			<AppShell.Main>
-				<Outlet />
+				<Container size={"xl"}>
+					<Outlet />
+				</Container>
 			</AppShell.Main>
 		</AppShell>
 	);
