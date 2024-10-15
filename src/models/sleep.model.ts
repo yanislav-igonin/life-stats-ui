@@ -41,8 +41,8 @@ export class Sleep {
 
 	constructor(data: {
 		id: string;
-		wakeUpAt: string;
-		goToBedAt: string;
+		wakeUpAt: string | Date;
+		goToBedAt: string | Date;
 		quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 		moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
 	}) {

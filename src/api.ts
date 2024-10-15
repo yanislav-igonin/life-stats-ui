@@ -34,7 +34,7 @@ export function getSleeps(dates: DateRange | undefined) {
 		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
 	const toDate = dates?.to?.toISOString() ?? new Date().toISOString();
 	return httpClient
-		.get<SuccessResponse<SleepData[]>>("sleep", {
+		.get<SuccessResponse<SleepData[]>>("sleep/list", {
 			searchParams: {
 				from: fromDate,
 				to: toDate,
@@ -64,7 +64,7 @@ export function saveSleep(sleep: Sleep) {
 		moodOfDay: sleep.moodOfDay,
 	};
 	return httpClient
-		.post<SuccessResponse<SleepData>>("sleep", {
+		.post<SuccessResponse<SleepData>>("sleep/save", {
 			json: body,
 		})
 		.then(async (response) => {
