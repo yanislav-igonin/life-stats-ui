@@ -11,7 +11,7 @@ export function Auth() {
 			.then(() => {
 				/** If we get here, the auth was successful */
 				localStorage.setItem("authToken", authToken as string);
-				navigate("/");
+				navigate("/sleep/list");
 			})
 			.catch(() => {
 				navigate("/404");

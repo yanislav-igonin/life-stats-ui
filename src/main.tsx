@@ -10,6 +10,7 @@ import { Auth } from "./pages/Auth.tsx";
 import { NotFound } from "./404.tsx";
 import { SleepList } from "./pages/SleepList.tsx";
 import { SleepForm } from "./pages/SleepForm.tsx";
+import { Layout } from "./components/Layout.tsx";
 
 const root = document.getElementById("root");
 if (!root) {
@@ -21,11 +22,11 @@ const theme = createTheme({
 });
 
 const router = createBrowserRouter([
+	{ path: "/sleep/:id", element: <SleepForm /> },
 	{
-		path: "/",
+		path: "/sleep/list",
 		element: <SleepList />,
 	},
-	{ path: "/sleep/:id", element: <SleepForm /> },
 	{
 		path: "/auth/:authToken",
 		element: <Auth />,
