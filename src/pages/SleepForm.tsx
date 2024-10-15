@@ -52,7 +52,7 @@ export function SleepForm() {
 			return;
 		}
 		saveSleep(sleep).then(() => {
-			navigate("/");
+			navigate("/sleep/list");
 		});
 	}
 
