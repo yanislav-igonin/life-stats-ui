@@ -41,7 +41,9 @@ const router = createBrowserRouter([
 createRoot(root).render(
 	<StrictMode>
 		<MantineProvider theme={theme}>
-			<RouterProvider router={router} />
+			<Layout>
+				<RouterProvider router={router} />
+			</Layout>
 		</MantineProvider>
 	</StrictMode>,
 );
