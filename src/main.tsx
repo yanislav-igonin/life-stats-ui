@@ -1,34 +1,23 @@
+import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
+import "@mantine/dates/styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { App } from "./App.tsx";
+import { createTheme, MantineProvider } from "@mantine/core";
 import "./index.css";
-import { Auth } from "./Auth.tsx";
-import { NotFound } from "./404.tsx";
-import { SleepForm } from "./SleepForm.tsx";
+import { Router } from "./components/Router.tsx";
 
 const root = document.getElementById("root");
 if (!root) {
 	throw new Error("Root element not found");
 }
 
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <App />,
-	},
-	{ path: "/sleep/:id", element: <SleepForm /> },
-	{
-		path: "/auth/:authToken",
-		element: <Auth />,
-	},
-	{
-		path: "/404",
-		element: <NotFound />,
-	},
-]);
+const theme = createTheme({});
+
 createRoot(root).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<MantineProvider theme={theme}>
+			<Router />
+		</MantineProvider>
 	</StrictMode>,
 );

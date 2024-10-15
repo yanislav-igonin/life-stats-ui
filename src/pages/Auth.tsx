@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { auth } from "./api";
+import { auth } from "../api";
 
 export function Auth() {
 	const authToken = useParams().authToken;
@@ -11,10 +11,10 @@ export function Auth() {
 			.then(() => {
 				/** If we get here, the auth was successful */
 				localStorage.setItem("authToken", authToken as string);
-				navigate("/");
+				navigate("/sleep/list");
 			})
 			.catch(() => {
-				navigate("/404");
+				navigate("/bruh");
 			});
 	});
 
