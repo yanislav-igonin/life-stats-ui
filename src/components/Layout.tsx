@@ -2,9 +2,9 @@ import { useAuth } from "@/lib/useAuth";
 import { AppShell, Burger, Container, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
-export function Layout(props: React.PropsWithChildren) {
+export function Layout() {
 	const [opened, { toggle }] = useDisclosure();
 
 	const authToken = useAuth();
@@ -29,7 +29,9 @@ export function Layout(props: React.PropsWithChildren) {
 			</AppShell.Header>
 			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
 			<AppShell.Main>
-				<Container>{props.children}</Container>
+				<Container>
+					<Outlet />
+				</Container>
 			</AppShell.Main>
 		</AppShell>
 	);
