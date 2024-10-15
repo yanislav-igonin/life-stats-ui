@@ -1,5 +1,8 @@
+import { useAuth } from "@/lib/useAuth";
 import { AppShell, Burger, Container, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Layout({ children }: React.PropsWithChildren) {
 	const [opened, { toggle }] = useDisclosure();
@@ -11,7 +14,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 		if (!authToken) {
 			navigate("/auth");
 		}
-	},
+	}, [authToken, navigate]);
 
 	return (
 		<AppShell
