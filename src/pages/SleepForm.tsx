@@ -5,7 +5,6 @@ import { Sleep } from "@/models/sleep.model";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/Container";
 
 export function SleepForm() {
 	const navigate = useNavigate();
@@ -62,10 +61,10 @@ export function SleepForm() {
 	}
 
 	return (
-		<Container>
+		<>
 			<h1 className="mb-5">Изменить запись сна</h1>
 
-			<form onSubmit={handleSubmit} className="flex flex-col gap-3 md:w-2/4">
+			<form onSubmit={handleSubmit}>
 				<Input label="ID" name="id" value={sleep.id} disabled />
 
 				<Input
@@ -108,6 +107,6 @@ export function SleepForm() {
 					Сохранить
 				</Button>
 			</form>
-		</Container>
+		</>
 	);
 }

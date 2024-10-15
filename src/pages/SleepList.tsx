@@ -3,7 +3,6 @@ import { getSleeps } from "@/api";
 import type { DateRange } from "@/api";
 // import { SleepsChart } from "./components/charts/SleepsChart";
 import { Sleep } from "@/models/sleep.model";
-import { Container } from "@/components/Container";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
 import { DatePickerInput } from "@/components/ui/DatePickerInput";
@@ -45,43 +44,39 @@ export function SleepList() {
 	}, [datesFilter]);
 
 	return (
-		<Container>
-			<div className="flex flex-col gap-5">
-				<div className="md:w-1/3">
-					<DatePickerInput
-						type="range"
-						allowSingleDateInRange
-						value={datesFilter}
-						onChange={setDatesFilter}
-						numberOfColumns={2}
-					/>
-				</div>
-				{/* <SleepsChart sleeps={sleeps} /> */}
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>Дата</TableCell>
-							<TableCell>Качество</TableCell>
-							<TableCell>Настроение</TableCell>
-							<TableCell>Время сна</TableCell>
-							<TableCell>Действия</TableCell>
+		<>
+			<DatePickerInput
+				type="range"
+				allowSingleDateInRange
+				value={datesFilter}
+				onChange={setDatesFilter}
+				numberOfColumns={2}
+			/>
+			{/* <SleepsChart sleeps={sleeps} /> */}
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableCell>Дата</TableCell>
+						<TableCell>Качество</TableCell>
+						<TableCell>Настроение</TableCell>
+						<TableCell>Время сна</TableCell>
+						<TableCell>Действия</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{reversedSleeps.map((sleep) => (
+						<TableRow key={sleep.id}>
+							<TableCell>{sleep.date}</TableCell>
+							<TableCell>{sleep.qualityEmoji}</TableCell>
+							<TableCell>{sleep.moodEmoji}</TableCell>
+							<TableCell>{sleep.hoursSlept}</TableCell>
+							<TableCell>
+								<Link to={`/sleep/${sleep.id}`}>Изменить</Link>
+							</TableCell>
 						</TableRow>
-					</TableHead>
-					<TableBody>
-						{reversedSleeps.map((sleep) => (
-							<TableRow key={sleep.id}>
-								<TableCell>{sleep.date}</TableCell>
-								<TableCell>{sleep.qualityEmoji}</TableCell>
-								<TableCell>{sleep.moodEmoji}</TableCell>
-								<TableCell>{sleep.hoursSlept}</TableCell>
-								<TableCell>
-									<Link to={`/sleep/${sleep.id}`}>Изменить</Link>
-								</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</div>
-		</Container>
+					))}
+				</TableBody>
+			</Table>
+		</>
 	);
 }
