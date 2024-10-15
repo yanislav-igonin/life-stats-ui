@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Layout({ children }: React.PropsWithChildren) {
+export function Layout(props: React.PropsWithChildren) {
 	const [opened, { toggle }] = useDisclosure();
 
 	const authToken = useAuth();
@@ -27,16 +27,9 @@ export function Layout({ children }: React.PropsWithChildren) {
 					<Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 				</Group>
 			</AppShell.Header>
-			<AppShell.Navbar p="md">
-				Navbar
-				{/* {Array(15)
-					.fill(0)
-					.map((_, index) => (
-						<Skeleton key={index} h={28} mt="sm" animate={false} />
-					))} */}
-			</AppShell.Navbar>
+			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
 			<AppShell.Main>
-				<Container>{children}</Container>
+				<Container>{props.children}</Container>
 			</AppShell.Main>
 		</AppShell>
 	);
