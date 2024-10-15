@@ -1,4 +1,3 @@
-import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { getSleeps } from "./api";
@@ -14,6 +13,7 @@ import {
 	TableBody,
 	TableHeader,
 } from "./components/ui/table";
+import { DatePickerInput } from "./components/ui/DatePickerInput";
 
 export function App() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
@@ -43,8 +43,6 @@ export function App() {
 			setSleeps(sleepsData);
 		});
 	}, [datesFilter]);
-
-	console.log(reversedSleeps);
 
 	return (
 		<Container>
