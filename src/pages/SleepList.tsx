@@ -6,6 +6,7 @@ import { Sleep } from "@/models/sleep.model";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
 import { DatePickerInput } from "@/components/ui/DatePickerInput";
+import { Flex } from "@/components/ui/Flex";
 import {
 	Table,
 	TableBody,
@@ -45,7 +46,7 @@ export function SleepList() {
 	}, [datesFilter]);
 
 	return (
-		<>
+		<Flex direction="column" gap={"md"}>
 			<DatePickerInput
 				type="range"
 				allowSingleDateInRange
@@ -80,6 +81,6 @@ export function SleepList() {
 					))}
 				</TableBody>
 			</Table>
-		</>
+		</Flex>
 	);
 }
