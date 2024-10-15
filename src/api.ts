@@ -1,4 +1,3 @@
-import type { DateRange } from "react-day-picker";
 import { httpClient, httpClientUnauthed } from "./httpClient";
 import { subWeeks } from "date-fns";
 import type { Sleep } from "./models/sleep.model";
@@ -25,6 +24,10 @@ export type SleepData = {
 	goToBedAt: string;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 	moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
+};
+export type DateRange = {
+	from: Date | null;
+	to: Date | null;
 };
 export function getSleeps(dates: DateRange | undefined) {
 	const fromDate =

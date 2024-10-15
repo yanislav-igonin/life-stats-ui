@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSleeps } from "@/api";
+import type { DateRange } from "@/api";
 // import { SleepsChart } from "./components/charts/SleepsChart";
 import { Sleep } from "@/models/sleep.model";
 import { Container } from "@/components/Container";
@@ -28,7 +29,7 @@ export function SleepList() {
 	}, [sleeps]);
 
 	useEffect(() => {
-		const dates = {
+		const dates: DateRange = {
 			from: datesFilter[0]
 				? startOfDay(datesFilter[0])
 				: startOfDay(subWeeks(new Date(), 2)),
