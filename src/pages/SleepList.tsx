@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSleeps } from "@/api";
 import type { DateRange } from "@/api";
-// import { SleepsChart } from "./components/charts/SleepsChart";
+import { SleepsChart } from "@/components/charts/SleepsChart";
 import { Sleep } from "@/models/sleep.model";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
@@ -53,7 +53,7 @@ export function SleepList() {
 				onChange={setDatesFilter}
 				numberOfColumns={2}
 			/>
-			{/* <SleepsChart sleeps={sleeps} /> */}
+			<SleepsChart sleeps={sleeps} />
 			<Table>
 				<TableHead>
 					<TableRow>

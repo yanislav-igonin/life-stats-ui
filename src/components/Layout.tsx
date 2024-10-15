@@ -8,7 +8,7 @@ const navLinks = [{ label: "Сон", href: "/sleep/list" }];
 
 export function Layout() {
 	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure();
 
 	const authToken = useAuth();
 	const navigate = useNavigate();
