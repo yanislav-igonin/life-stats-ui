@@ -6,17 +6,17 @@ import { Flex } from "@/components/ui/Flex";
 
 const series: LineChartSeries[] = [
 	{
-		label: "hoursSlept",
+		label: "Часов сна",
 		name: "hoursSlept",
 		color: "black",
 	},
 	{
-		label: "qualityNumber",
+		label: "Качество сна",
 		name: "qualityNumber",
 		color: "red",
 	},
 	{
-		label: "moodNumber",
+		label: "Настроение за день",
 		name: "moodNumber",
 		color: "blue",
 	},
@@ -43,6 +43,11 @@ export function SleepsChart({ sleeps }: { sleeps: Sleep[] }) {
 				dataKey="date"
 				series={series}
 				curveType="linear"
+				h={400}
+				yAxisProps={{
+					mirror: true,
+					ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+				}}
 			/>
 
 			<Flex gap={"md"}>
