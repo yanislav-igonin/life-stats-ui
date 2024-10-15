@@ -14,7 +14,7 @@ export function Auth() {
 				navigate("/sleep/list");
 			})
 			.catch(() => {
-				navigate("/404");
+				navigate("/bruh");
 			});
 	});
 
