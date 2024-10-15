@@ -1,19 +1,18 @@
-import "./App.css";
 import { useEffect, useMemo, useState } from "react";
-import { getSleeps } from "./api";
+import { getSleeps } from "@/api";
 // import { SleepsChart } from "./components/charts/SleepsChart";
-import { Sleep } from "./models/sleep.model";
-import { Container } from "./components/Container";
+import { Sleep } from "@/models/sleep.model";
+import { Container } from "@/components/Container";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
-import { DatePickerInput } from "./components/ui/DatePickerInput";
+import { DatePickerInput } from "@/components/ui/DatePickerInput";
 import {
 	Table,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableRow,
-} from "./components/ui/Table";
+} from "@/components/ui/Table";
 
 export function SleepList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([

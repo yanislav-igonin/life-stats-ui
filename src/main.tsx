@@ -8,8 +8,8 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import "./index.css";
 import { Auth } from "./Auth.tsx";
 import { NotFound } from "./404.tsx";
-import { SleepList } from "./SleepList.tsx";
-import { SleepForm } from "./SleepForm.tsx";
+import { SleepList } from "./pages/SleepList.tsx";
+import { SleepForm } from "./pages/SleepForm.tsx";
 
 const root = document.getElementById("root");
 if (!root) {

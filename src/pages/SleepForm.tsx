@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSleep, saveSleep } from "./api";
-import { Sleep } from "./models/sleep.model";
-import { Input } from "./components/ui/Input";
-import { Select } from "./components/ui/Select";
-import { Button } from "./components/ui/Button";
-import { Container } from "./components/Container";
+import { getSleep, saveSleep } from "@/api";
+import { Sleep } from "@/models/sleep.model";
+import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/Container";
 
 export function SleepForm() {
 	const navigate = useNavigate();
