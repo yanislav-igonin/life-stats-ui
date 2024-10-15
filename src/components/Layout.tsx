@@ -12,7 +12,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 
 	useEffect(() => {
 		if (!authToken) {
-			navigate("/auth");
+			navigate("/bruh");
 		}
 	}, [authToken, navigate]);
 

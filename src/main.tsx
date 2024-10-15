@@ -7,9 +7,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "./index.css";
 import { Auth } from "./pages/Auth.tsx";
-import { NotFound } from "./pages/404.tsx";
+import { NotFound } from "./pages/NotFound.tsx";
 import { SleepList } from "./pages/SleepList.tsx";
 import { SleepForm } from "./pages/SleepForm.tsx";
+import { NotAuthorized } from "./pages/NotAuthorized.tsx";
 import { Layout } from "./components/Layout.tsx";
 
 const root = document.getElementById("root");
@@ -23,27 +24,35 @@ const theme = createTheme({
 
 const router = createBrowserRouter([
 	{
-		path: "/sleep",
+		path: "/",
+		element: <Layout />,
 		children: [
-			{ path: "list", element: <SleepList /> },
-			{ path: ":id", element: <SleepForm /> },
+			{
+				path: "sleep",
+				children: [
+					{ path: "list", element: <SleepList /> },
+					{ path: ":id", element: <SleepForm /> },
+				],
+			},
+			{
+				path: "auth/:authToken",
+				element: <Auth />,
+			},
 		],
 	},
 	{
-		path: "/auth/:authToken",
-		element: <Auth />,
+		path: "404",
+		element: <NotFound />,
 	},
 	{
-		path: "/404",
-		element: <NotFound />,
+		path: "bruh",
+		element: <NotAuthorized />,
 	},
 ]);
 createRoot(root).render(
 	<StrictMode>
 		<MantineProvider theme={theme}>
-			<Layout>
-				<RouterProvider router={router} />
-			</Layout>
+			<RouterProvider router={router} />
 		</MantineProvider>
 	</StrictMode>,
 );
