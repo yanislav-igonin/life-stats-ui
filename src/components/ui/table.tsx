@@ -1,6 +1,6 @@
-import { Table as MTable } from "@mantine/core";
+import { Table as MantineTable } from "@mantine/core";
 
-export const Table = MTable;
+export const Table = MantineTable;
 export const TableHead = Table.Thead;
 export const TableBody = Table.Tbody;
 export const TableFooter = Table.Tfoot;
