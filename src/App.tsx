@@ -6,14 +6,14 @@ import { Sleep } from "./models/sleep.model";
 import { Container } from "./components/Container";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
+import { DatePickerInput } from "./components/ui/DatePickerInput";
 import {
 	Table,
-	TableRow,
-	TableCell,
 	TableBody,
-	TableHeader,
-} from "./components/ui/table";
-import { DatePickerInput } from "./components/ui/DatePickerInput";
+	TableCell,
+	TableHead,
+	TableRow,
+} from "./components/ui/Table";
 
 export function App() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
@@ -58,7 +58,7 @@ export function App() {
 				</div>
 				<SleepsChart sleeps={sleeps} />
 				<Table>
-					<TableHeader>
+					<TableHead>
 						<TableRow>
 							<TableCell>Дата</TableCell>
 							<TableCell>Качество</TableCell>
@@ -66,7 +66,7 @@ export function App() {
 							<TableCell>Время сна</TableCell>
 							<TableCell>Действия</TableCell>
 						</TableRow>
-					</TableHeader>
+					</TableHead>
 					<TableBody>
 						{reversedSleeps.map((sleep) => (
 							<TableRow key={sleep.id}>
