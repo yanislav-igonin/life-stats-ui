@@ -10,6 +10,11 @@ export function Layout() {
 	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
 	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure();
 
+	function closeMenus() {
+		toggleMobile();
+		toggleDesktop();
+	}
+
 	const authToken = useAuth();
 	const navigate = useNavigate();
 
@@ -52,6 +57,7 @@ export function Layout() {
 						component={Link}
 						to={link.href}
 						label={link.label}
+						onClick={closeMenus}
 					/>
 				))}
 			</AppShell.Navbar>
