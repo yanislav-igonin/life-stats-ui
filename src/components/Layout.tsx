@@ -2,7 +2,7 @@ import { useAuth } from "@/lib/useAuth";
 import { AppShell, Burger, Container, Group, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const navLinks = [{ label: "Сон", href: "/sleep/list" }];
 
@@ -45,7 +45,16 @@ export function Layout() {
 					/>
 				</Group>
 			</AppShell.Header>
-			<AppShell.Navbar p="md">a</AppShell.Navbar>
+			<AppShell.Navbar p="md">
+				{navLinks.map((link) => (
+					<NavLink
+						key={link.label}
+						component={Link}
+						to={link.href}
+						label={link.label}
+					/>
+				))}
+			</AppShell.Navbar>
 			<AppShell.Main>
 				<Container fluid>
 					<Outlet />
