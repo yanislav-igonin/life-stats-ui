@@ -1,4 +1,5 @@
 import { diffInHours, formatDate } from "../lib/dates";
+import type { DateLike } from "../lib/dates";
 
 export class Sleep {
 	id: string;
@@ -41,8 +42,8 @@ export class Sleep {
 
 	constructor(data: {
 		id: string;
-		wakeUpAt: string | Date;
-		goToBedAt: string | Date;
+		wakeUpAt: DateLike;
+		goToBedAt: DateLike;
 		quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 		moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
 	}) {

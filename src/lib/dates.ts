@@ -1,6 +1,8 @@
 import { differenceInMinutes, format } from "date-fns";
 import { toFixed } from "./numbers";
 
+export type DateLike = string | Date;
+
 export function formatDate(date: string | Date) {
 	return format(new Date(date), "dd.MM.yyyy");
 }
