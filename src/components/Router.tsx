@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import { Layout } from "./Layout";
 
-const sleepListRoutes: RouteObject[] = [
+const sleepRoutes: RouteObject[] = [
 	{
 		path: "sleep",
 		children: [
@@ -17,22 +17,24 @@ const sleepListRoutes: RouteObject[] = [
 	},
 ];
 
+const authedRoutes: RouteObject[] = [...sleepRoutes];
+
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Layout />,
-		children: sleepListRoutes,
+		children: authedRoutes,
 	},
 	{
 		path: "auth/:authToken",
 		element: <Auth />,
 	},
 	{
-		path: "404",
+		path: "/404",
 		element: <NotFound />,
 	},
 	{
-		path: "bruh",
+		path: "/bruh",
 		element: <NotAuthorized />,
 	},
 ]);
