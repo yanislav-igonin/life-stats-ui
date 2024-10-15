@@ -5,6 +5,7 @@ import { Sleep } from "@/models/sleep.model";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
+import { Flex } from "@/components/ui/Flex";
 
 export function SleepForm() {
 	const navigate = useNavigate();
@@ -65,47 +66,51 @@ export function SleepForm() {
 			<h1 className="mb-5">Изменить запись сна</h1>
 
 			<form onSubmit={handleSubmit}>
-				<Input label="ID" name="id" value={sleep.id} disabled />
+				<Flex direction="column" gap={"md"}>
+					<Input label="ID" name="id" value={sleep.id} disabled />
 
-				<Input
-					label="Время отхода ко сну (часовая зона +00:00)"
-					name="goToBedAt"
-					value={sleep.goToBedAt}
-					onInput={onInput}
-				/>
+					<Input
+						label="Время отхода ко сну (часовая зона +00:00)"
+						name="goToBedAt"
+						value={sleep.goToBedAt}
+						onInput={onInput}
+					/>
 
-				<Input
-					label="Время подъема (часовая зона +00:00)"
-					name="wakeUpAt"
-					value={sleep.wakeUpAt}
-					onInput={onInput}
-				/>
+					<Input
+						label="Время подъема (часовая зона +00:00)"
+						name="wakeUpAt"
+						value={sleep.wakeUpAt}
+						onInput={onInput}
+					/>
 
-				<Select
-					label="Качество сна"
-					name="quality"
-					value={sleep.quality}
-					data={Object.entries(sleep.qualityEmojiMap).map(([key, value]) => ({
-						value: key,
-						label: value,
-					}))}
-					onChange={(event) => onSelect("quality", event.currentTarget.value)}
-				/>
+					<Select
+						label="Качество сна"
+						name="quality"
+						value={sleep.quality}
+						data={Object.entries(sleep.qualityEmojiMap).map(([key, value]) => ({
+							value: key,
+							label: value,
+						}))}
+						onChange={(event) => onSelect("quality", event.currentTarget.value)}
+					/>
 
-				<Select
-					label="Настроение за день"
-					name="moodOfDay"
-					value={sleep.moodOfDay}
-					data={Object.entries(sleep.moodEmojiMap).map(([key, value]) => ({
-						value: key,
-						label: value,
-					}))}
-					onChange={(event) => onSelect("moodOfDay", event.currentTarget.value)}
-				/>
+					<Select
+						label="Настроение за день"
+						name="moodOfDay"
+						value={sleep.moodOfDay}
+						data={Object.entries(sleep.moodEmojiMap).map(([key, value]) => ({
+							value: key,
+							label: value,
+						}))}
+						onChange={(event) =>
+							onSelect("moodOfDay", event.currentTarget.value)
+						}
+					/>
 
-				<Button type="submit" className="mt-5">
-					Сохранить
-				</Button>
+					<Button type="submit" className="mt-5">
+						Сохранить
+					</Button>
+				</Flex>
 			</form>
 		</>
 	);
