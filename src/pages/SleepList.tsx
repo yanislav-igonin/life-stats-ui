@@ -13,7 +13,7 @@ import {
 	TableHead,
 	TableRow,
 } from "@/components/ui/Table";
-import { IconEdit } from "@tabler/icons-react";
+import { IconEdit } from "@/components/icons";
 
 export function SleepList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([

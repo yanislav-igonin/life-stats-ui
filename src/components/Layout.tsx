@@ -1,11 +1,14 @@
 import { useAuth } from "@/lib/useAuth";
-import { AppShell, Burger, Container, Group } from "@mantine/core";
+import { AppShell, Burger, Container, Group, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
+const navLinks = [{ label: "Сон", href: "/sleep/list" }];
+
 export function Layout() {
-	const [opened, { toggle }] = useDisclosure();
+	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
 	const authToken = useAuth();
 	const navigate = useNavigate();
@@ -19,19 +22,32 @@ export function Layout() {
 	return (
 		<AppShell
 			header={{ height: 60 }}
-			navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+			navbar={{
+				width: 300,
+				breakpoint: "sm",
+				collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+			}}
 			padding="md"
 		>
 			<AppShell.Header>
 				<Group h="100%" px="md">
-					<Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+					<Burger
+						opened={mobileOpened}
+						onClick={toggleMobile}
+						hiddenFrom="sm"
+						size="sm"
+					/>
+					<Burger
+						opened={desktopOpened}
+						onClick={toggleDesktop}
+						visibleFrom="sm"
+						size="sm"
+					/>
 				</Group>
 			</AppShell.Header>
-			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+			<AppShell.Navbar p="md">a</AppShell.Navbar>
 			<AppShell.Main>
-				<Container>
-					<Outlet />
-				</Container>
+				<Outlet />
 			</AppShell.Main>
 		</AppShell>
 	);
