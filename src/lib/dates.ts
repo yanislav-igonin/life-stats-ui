@@ -1,11 +1,11 @@
 import { differenceInMinutes, format } from "date-fns";
 import { toFixed } from "./numbers";
 
-export function formatDate(stringDate: string) {
-	return format(new Date(stringDate), "dd.MM.yyyy");
+export function formatDate(date: string | Date) {
+	return format(new Date(date), "dd.MM.yyyy");
 }
 
-export function diffInHours(date1: string, date2: string) {
+export function diffInHours(date1: string | Date, date2: string | Date) {
 	if (!date1 || !date2) {
 		return 0;
 	}

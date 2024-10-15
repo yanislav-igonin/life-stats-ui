@@ -2,8 +2,8 @@ import { diffInHours, formatDate } from "../lib/dates";
 
 export class Sleep {
 	id: string;
-	wakeUpAt: string;
-	goToBedAt: string;
+	wakeUpAt: Date;
+	goToBedAt: Date;
 	quality: "very_bad" | "bad" | "meh" | "good" | "very_good";
 	moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
 
@@ -47,8 +47,8 @@ export class Sleep {
 		moodOfDay: "very_bad" | "bad" | "meh" | "good" | "very_good";
 	}) {
 		this.id = data.id;
-		this.wakeUpAt = data.wakeUpAt;
-		this.goToBedAt = data.goToBedAt;
+		this.wakeUpAt = new Date(data.wakeUpAt);
+		this.goToBedAt = new Date(data.goToBedAt);
 		this.quality = data.quality;
 		this.moodOfDay = data.moodOfDay;
 	}

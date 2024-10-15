@@ -5,6 +5,8 @@ import { Sleep } from "@/models/sleep.model";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
+import { DateTimePicker } from "@/components/ui/DateTimePicker";
+import type { DateValue } from "@/components/ui/DateTimePicker";
 import { Flex } from "@/components/ui/Flex";
 
 export function SleepForm() {
@@ -23,16 +25,12 @@ export function SleepForm() {
 		});
 	}, [sleepId]);
 
-	function onInput(event: React.ChangeEvent<HTMLInputElement>) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
-
+	function onDateChange(date: DateValue, name: string) {
 		// @ts-expect-error - 2 lame to fix type error rn
 		setSleep((prevState) => {
 			return {
 				...prevState,
-				[name]: value,
+				[name]: date,
 			};
 		});
 	}
@@ -69,18 +67,18 @@ export function SleepForm() {
 				<Flex direction="column" gap={"md"}>
 					<Input label="ID" name="id" value={sleep.id} disabled />
 
-					<Input
+					<DateTimePicker
 						label="Время отхода ко сну (часовая зона +00:00)"
 						name="goToBedAt"
 						value={sleep.goToBedAt}
-						onInput={onInput}
+						onChange={(date) => onDateChange(date, "goToBedAt")}
 					/>
 
-					<Input
+					<DateTimePicker
 						label="Время подъема (часовая зона +00:00)"
 						name="wakeUpAt"
 						value={sleep.wakeUpAt}
-						onInput={onInput}
+						onChange={(date) => onDateChange(date, "wakeUpAt")}
 					/>
 
 					<Select
