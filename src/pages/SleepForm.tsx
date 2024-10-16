@@ -68,14 +68,14 @@ export function SleepForm() {
 					<Input label="ID" name="id" value={sleep.id} disabled />
 
 					<DateTimePicker
-						label="Время отхода ко сну (часовая зона +00:00)"
+						label="Время отхода ко сну"
 						name="goToBedAt"
 						value={sleep.goToBedAt}
 						onChange={(date) => onDateChange(date, "goToBedAt")}
 					/>
 
 					<DateTimePicker
-						label="Время подъема (часовая зона +00:00)"
+						label="Время подъема"
 						name="wakeUpAt"
 						value={sleep.wakeUpAt}
 						onChange={(date) => onDateChange(date, "wakeUpAt")}
