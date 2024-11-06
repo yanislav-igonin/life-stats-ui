@@ -72,3 +72,51 @@ export function saveSleep(sleep: Sleep) {
 			return data.data;
 		});
 }
+
+export type BoozeData = {
+	id: string;
+	createdAt: string;
+	quantity: number;
+};
+
+export function getBoozes(dates: DateRange | undefined) {
+	const fromDate =
+		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
+	const toDate = dates?.to?.toISOString() ?? new Date().toISOString();
+	return httpClient
+		.get<SuccessResponse<BoozeData[]>>("booze/list", {
+			searchParams: {
+				from: fromDate,
+				to: toDate,
+			},
+		})
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export function getBooze(id: number) {
+	return httpClient
+		.get<SuccessResponse<BoozeData>>(`booze/${id}`)
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export function saveBooze(booze: BoozeData) {
+	const body = {
+		id: booze.id,
+		createdAt: booze.createdAt,
+		quantity: booze.quantity,
+	};
+	return httpClient
+		.post<SuccessResponse<BoozeData>>("booze/save", {
+			json: body,
+		})
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
