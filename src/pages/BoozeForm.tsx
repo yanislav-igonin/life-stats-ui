@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBooze, saveBooze } from "@/api";
-import { Booze, BoozeListElement } from "@/models/booze.model";
+import { Booze } from "@/models/booze.model";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { DateTimePicker } from "@/components/ui/DateTimePicker";
-import type { DateValue } from "@/components/ui/DateTimePicker";
+import { DateTimePicker, type DateValue } from "@/components/ui/DateTimePicker";
 import { Flex } from "@/components/ui/Flex";
+import type { DateLike } from "@/lib/dates";
 
 export function BoozeForm() {
 	const navigate = useNavigate();
@@ -28,17 +28,17 @@ export function BoozeForm() {
 	function onDateChange(date: DateValue) {
 		setBooze((prevState) => {
 			if (!prevState) return prevState;
-			return new BoozeListElement({
+			return new Booze({
 				...prevState,
-				createdAt: date,
+				createdAt: date as DateLike,
 			});
 		});
 	}
 
-	function onSelect(value: BoozeQuantity) {
+	function onSelect(value: Booze["quantity"]) {
 		setBooze((prevState) => {
 			if (!prevState) return prevState;
-			return new BoozeListElement({
+			return new Booze({
 				...prevState,
 				quantity: value,
 			});
@@ -92,7 +92,9 @@ export function BoozeForm() {
 							value: key,
 							label: value,
 						}))}
-						onChange={(event) => onSelect(event.currentTarget.value)}
+						onChange={(event) =>
+							onSelect(event.currentTarget.value as Booze["quantity"])
+						}
 					/>
 
 					<Button type="submit" className="mt-5">
