@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
 import { BarChart } from "@mantine/charts";
 import type { BarChartSeries } from "@mantine/charts";
-import { Flex } from "@/components/ui/Flex";
 import { Booze } from "@/models/booze.model";
-import {differenceInCalendarDays } from 'date-fns'
+import { eachDayOfInterval } from "date-fns";
+import { copy } from "@/lib/objects";
+import { formatDate } from "@/lib/dates";
 
 const series: BarChartSeries[] = [
 	{
@@ -13,20 +14,35 @@ const series: BarChartSeries[] = [
 	},
 ];
 
-
 /**
  * Function fills gaps in dates to make chart look better.
- * 
  */
 function fillDatesGaps(boozes: Booze[]) {
-	for (let i = 0; i < boozes.length - 1; i++) {
-		const booze = boozes[i];
-		const nextBooze = boozes[i + 1];
-		const isMoreThanOneDay = differenceInCalendarDays(booze.date, nextBooze.date) > 1;
-		if (isMoreThanOneDay) {
-			
-		}
+	if (boozes.length === 0) {
+		return boozes;
 	}
+
+	const copied = copy(boozes).map((booze) => new Booze(booze));
+	const first = copied[0];
+	const last = copied[copied.length - 1];
+	const dates = eachDayOfInterval({
+		start: first.createdAt,
+		end: last.createdAt,
+	});
+
+	const filled = dates.map((date) => {
+		const booze = copied.find((booze) => booze.date === formatDate(date));
+		if (booze) {
+			return booze;
+		}
+		return new Booze({
+			id: copied[copied.length - 1].id + 1,
+			createdAt: date,
+			quantity: "none",
+		});
+	});
+
+	return filled;
 }
 
 export function BoozesChart({ boozes }: { boozes: Booze[] }) {
@@ -35,16 +51,16 @@ export function BoozesChart({ boozes }: { boozes: Booze[] }) {
 	);
 	const [filledBoozes, setFilledBoozes] = useState<Booze[]>([]);
 	useMemo(() => {
-		setFilledBoozes(boozes.filter((booze) => booze.quantityNumber > 0));
+		setFilledBoozes(fillDatesGaps(boozes));
 	}, [boozes]);
 	useMemo(() => {
-		setAverageQuantity(Booze.getAverageQuantity(boozes));
-	}, [boozes]);
+		setAverageQuantity(Booze.getAverageQuantity(filledBoozes));
+	}, [filledBoozes]);
 
 	return (
 		<div>
 			<BarChart
-				data={boozes}
+				data={filledBoozes}
 				dataKey="date"
 				series={series}
 				h={400}
@@ -54,13 +70,9 @@ export function BoozesChart({ boozes }: { boozes: Booze[] }) {
 				}}
 			/>
 
-			<Flex gap={"md"}>
-				{boozes.length > 0 ? (
-					<>
-						<p>Среднее количество: {averageQuantity?.toFixed(1)}</p>
-					</>
-				) : null}
-			</Flex>
+			{filledBoozes.length > 0 ? (
+				<p>Среднее количество: {averageQuantity?.toFixed(1)}</p>
+			) : null}
 		</div>
 	);
 }

@@ -75,7 +75,7 @@ export function saveSleep(sleep: Sleep) {
 }
 
 export type BoozeData = {
-	id: string;
+	id: number;
 	createdAt: string;
 	quantity: "low" | "medium" | "high";
 };
