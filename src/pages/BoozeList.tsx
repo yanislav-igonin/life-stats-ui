@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/Table";
 import { IconEdit } from "@/components/icons";
 import { BoozesChart } from "@/components/charts/BoozesChart";
-	
+
 export function BoozeList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
 		startOfDay(subWeeks(new Date(), 2)),
@@ -46,7 +46,6 @@ export function BoozeList() {
 				allowSingleDateInRange
 				value={datesFilter}
 				onChange={setDatesFilter}
-				numberOfColumns={2}
 			/>
 			<BoozesChart boozes={boozes} />
 			<Table>

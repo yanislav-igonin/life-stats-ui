@@ -52,7 +52,6 @@ export function SleepList() {
 				allowSingleDateInRange
 				value={datesFilter}
 				onChange={setDatesFilter}
-				numberOfColumns={2}
 			/>
 			<SleepsChart sleeps={sleeps} />
 			<Table>
