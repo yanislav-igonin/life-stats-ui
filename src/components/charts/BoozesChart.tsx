@@ -1,61 +1,63 @@
-import { Sleep } from "@/models/sleep.model";
 import { useState, useMemo } from "react";
-import { LineChart } from "@mantine/charts";
-import type { LineChartSeries } from "@mantine/charts";
+import { BarChart } from "@mantine/charts";
+import type { BarChartSeries } from "@mantine/charts";
 import { Flex } from "@/components/ui/Flex";
+import { Booze } from "@/models/booze.model";
+import {differenceInCalendarDays } from 'date-fns'
 
-const series: LineChartSeries[] = [
+const series: BarChartSeries[] = [
 	{
-		label: "Часов сна",
-		name: "hoursSlept",
-		color: "black",
-	},
-	{
-		label: "Качество сна",
-		name: "qualityNumber",
+		label: "Количество",
+		name: "quantityNumber",
 		color: "red",
-	},
-	{
-		label: "Настроение за день",
-		name: "moodNumber",
-		color: "blue",
 	},
 ];
 
-export function SleepsChart({ sleeps }: { sleeps: Sleep[] }) {
-	const [averageHours, setAverageHours] = useState<number | undefined>(
+
+/**
+ * Function fills gaps in dates to make chart look better.
+ * 
+ */
+function fillDatesGaps(boozes: Booze[]) {
+	for (let i = 0; i < boozes.length - 1; i++) {
+		const booze = boozes[i];
+		const nextBooze = boozes[i + 1];
+		const isMoreThanOneDay = differenceInCalendarDays(booze.date, nextBooze.date) > 1;
+		if (isMoreThanOneDay) {
+			
+		}
+	}
+}
+
+export function BoozesChart({ boozes }: { boozes: Booze[] }) {
+	const [averageQuantity, setAverageQuantity] = useState<number | undefined>(
 		undefined,
 	);
-	const [averageQuality, setAverageQuality] = useState<number | undefined>(
-		undefined,
-	);
-	const [averageMood, setAverageMood] = useState<number | undefined>(undefined);
+	const [filledBoozes, setFilledBoozes] = useState<Booze[]>([]);
 	useMemo(() => {
-		setAverageHours(Sleep.getAverageHoursSlept(sleeps));
-		setAverageQuality(Sleep.getAverageSleepQuality(sleeps));
-		setAverageMood(Sleep.getAverageMoodOfDay(sleeps));
-	}, [sleeps]);
+		setFilledBoozes(boozes.filter((booze) => booze.quantityNumber > 0));
+	}, [boozes]);
+	useMemo(() => {
+		setAverageQuantity(Booze.getAverageQuantity(boozes));
+	}, [boozes]);
 
 	return (
 		<div>
-			<LineChart
-				data={sleeps}
+			<BarChart
+				data={boozes}
 				dataKey="date"
 				series={series}
-				curveType="linear"
 				h={400}
 				yAxisProps={{
 					mirror: true,
-					ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+					ticks: [0, 1, 2, 3],
 				}}
 			/>
 
 			<Flex gap={"md"}>
-				{sleeps.length > 0 ? (
+				{boozes.length > 0 ? (
 					<>
-						<p>Среднее время сна: {averageHours?.toFixed(1)} часов</p>
-						<p>Среднее качество сна: {averageQuality?.toFixed(1)}</p>
-						<p>Среднее настроение за день: {averageMood?.toFixed(1)}</p>
+						<p>Среднее количество: {averageQuantity?.toFixed(1)}</p>
 					</>
 				) : null}
 			</Flex>

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getBoozes } from "@/api";
 import type { BoozeData, DateRange } from "@/api";
-import { SleepsChart } from "@/components/charts/SleepsChart";
 import { Booze } from "@/models/booze.model";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
@@ -15,7 +14,8 @@ import {
 	TableRow,
 } from "@/components/ui/Table";
 import { IconEdit } from "@/components/icons";
-
+import { BoozesChart } from "@/components/charts/BoozesChart";
+	
 export function BoozeList() {
 	const [datesFilter, setDatesFilter] = useState<[Date | null, Date | null]>([
 		startOfDay(subWeeks(new Date(), 2)),
@@ -48,7 +48,7 @@ export function BoozeList() {
 				onChange={setDatesFilter}
 				numberOfColumns={2}
 			/>
-			{/* <SleepsChart sleeps={boozes} /> */}
+			<BoozesChart boozes={boozes} />
 			<Table>
 				<TableHead>
 					<TableRow>
