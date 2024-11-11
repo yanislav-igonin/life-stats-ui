@@ -1,7 +1,7 @@
 import { httpClient, httpClientUnauthed } from "./httpClient";
 import { subWeeks } from "date-fns";
 import type { Sleep } from "./models/sleep.model";
-import { Booze } from "./models/booze.model";
+import { BoozeListElement } from "./models/booze.model";
 
 type SuccessResponse<T> = {
 	data: T;
@@ -92,7 +92,7 @@ export function getBoozes(dates: DateRange | undefined) {
 		})
 		.then(async (response) => {
 			const data = await response.json();
-			return data.data.map((data) => new Booze(data));
+			return data.data.map((data) => new BoozeListElement(data));
 		});
 }
 

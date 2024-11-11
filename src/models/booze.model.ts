@@ -1,19 +1,22 @@
 import { formatDate } from "../lib/dates";
 import type { DateLike } from "../lib/dates";
 
-export class Booze {
+export class BoozeListElement {
 	id: number;
 	createdAt: Date;
 	quantity: "none" | "low" | "medium" | "high";
 
-	private readonly quantityEmojiMap: { [key in Booze["quantity"]]: string } = {
-		none: "🤷",
-		low: "🤤",
-		medium: "🥴",
-		high: "🤢",
-	};
+	readonly quantityEmojiMap: { [key in BoozeListElement["quantity"]]: string } =
+		{
+			none: "🤷",
+			low: "🤤",
+			medium: "🥴",
+			high: "🤢",
+		};
 
-	private readonly quantityMap: { [key in Booze["quantity"]]: number } = {
+	private readonly quantityMap: {
+		[key in BoozeListElement["quantity"]]: number;
+	} = {
 		none: 0,
 		low: 1,
 		medium: 2,
@@ -23,7 +26,7 @@ export class Booze {
 	constructor(data: {
 		id: number;
 		createdAt: DateLike;
-		quantity: Booze["quantity"];
+		quantity: BoozeListElement["quantity"];
 	}) {
 		this.id = data.id;
 		this.createdAt = new Date(data.createdAt);
@@ -45,8 +48,21 @@ export class Booze {
 		return this.quantityEmojiMap[this.quantity];
 	}
 
-	static getAverageQuantity(boozes: Booze[]) {
+	static getAverageQuantity(boozes: BoozeListElement[]) {
 		const total = boozes.reduce((acc, booze) => acc + booze.quantityNumber, 0);
 		return total / boozes.length;
+	}
+}
+
+export class Booze extends BoozeListElement {
+	quantity: Exclude<BoozeListElement["quantity"], "none">;
+
+	constructor(data: {
+		id: number;
+		createdAt: DateLike;
+		quantity: Booze["quantity"];
+	}) {
+		super(data);
+		this.quantity = data.quantity;
 	}
 }

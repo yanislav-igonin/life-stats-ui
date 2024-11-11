@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { BarChart } from "@mantine/charts";
 import type { BarChartSeries } from "@mantine/charts";
-import { Booze } from "@/models/booze.model";
+import { BoozeListElement } from "@/models/booze.model";
 import { eachDayOfInterval } from "date-fns";
 import { copy } from "@/lib/objects";
 import { formatDate } from "@/lib/dates";
@@ -17,12 +17,12 @@ const series: BarChartSeries[] = [
 /**
  * Function fills gaps in dates to make chart look better.
  */
-function fillDatesGaps(boozes: Booze[]) {
+function fillDatesGaps(boozes: BoozeListElement[]) {
 	if (boozes.length === 0) {
 		return boozes;
 	}
 
-	const copied = copy(boozes).map((booze) => new Booze(booze));
+	const copied = copy(boozes).map((booze) => new BoozeListElement(booze));
 	const first = copied[0];
 	const last = copied[copied.length - 1];
 	const dates = eachDayOfInterval({
@@ -35,7 +35,7 @@ function fillDatesGaps(boozes: Booze[]) {
 		if (booze) {
 			return booze;
 		}
-		return new Booze({
+		return new BoozeListElement({
 			id: copied[copied.length - 1].id + 1,
 			createdAt: date,
 			quantity: "none",
@@ -45,16 +45,16 @@ function fillDatesGaps(boozes: Booze[]) {
 	return filled;
 }
 
-export function BoozesChart({ boozes }: { boozes: Booze[] }) {
+export function BoozesChart({ boozes }: { boozes: BoozeListElement[] }) {
 	const [averageQuantity, setAverageQuantity] = useState<number | undefined>(
 		undefined,
 	);
-	const [filledBoozes, setFilledBoozes] = useState<Booze[]>([]);
+	const [filledBoozes, setFilledBoozes] = useState<BoozeListElement[]>([]);
 	useMemo(() => {
 		setFilledBoozes(fillDatesGaps(boozes));
 	}, [boozes]);
 	useMemo(() => {
-		setAverageQuantity(Booze.getAverageQuantity(filledBoozes));
+		setAverageQuantity(BoozeListElement.getAverageQuantity(filledBoozes));
 	}, [filledBoozes]);
 
 	return (

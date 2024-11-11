@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getBoozes } from "@/api";
 import type { BoozeData, DateRange } from "@/api";
-import { Booze } from "@/models/booze.model";
+import { BoozeListElement } from "@/models/booze.model";
 import { endOfDay, startOfDay, subWeeks } from "date-fns";
 import { Link } from "react-router-dom";
 import { DatePickerInput } from "@/components/ui/DatePickerInput";
@@ -21,11 +21,11 @@ export function BoozeList() {
 		startOfDay(subWeeks(new Date(), 2)),
 		endOfDay(new Date()),
 	]);
-	const [boozes, setBoozes] = useState<Booze[]>([]);
+	const [boozes, setBoozes] = useState<BoozeListElement[]>([]);
 
 	const reversedBoozes = useMemo(() => {
 		const copy = JSON.parse(JSON.stringify(boozes)) as BoozeData[];
-		const reversed = copy.map((data) => new Booze(data)).reverse();
+		const reversed = copy.map((data) => new BoozeListElement(data)).reverse();
 		return reversed;
 	}, [boozes]);
 

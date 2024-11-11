@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import { Layout } from "./Layout";
 import { BoozeList } from "@/pages/BoozeList";
+import { BoozeForm } from "@/pages/BoozeForm";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
 				</Route>
 				<Route path="booze">
 					<Route path="list" element={<BoozeList />} />
-					<Route path=":id" element={<SleepForm />} />
+					<Route path=":id" element={<BoozeForm />} />
 				</Route>
 			</Route>
 			<Route path="/auth/:authToken" element={<Auth />} />
