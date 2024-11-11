@@ -50,15 +50,13 @@ export function SleepsChart({ sleeps }: { sleeps: Sleep[] }) {
 				}}
 			/>
 
-			<Flex gap={"md"}>
-				{sleeps.length > 0 ? (
-					<>
-						<p>Среднее время сна: {averageHours?.toFixed(1)} часов</p>
-						<p>Среднее качество сна: {averageQuality?.toFixed(1)}</p>
-						<p>Среднее настроение за день: {averageMood?.toFixed(1)}</p>
-					</>
-				) : null}
-			</Flex>
+			{sleeps.length > 0 ? (
+				<Flex gap={"md"}>
+					<p>Среднее время сна: {averageHours?.toFixed(1)} часов</p>
+					<p>Среднее качество сна: {averageQuality?.toFixed(1)}</p>
+					<p>Среднее настроение за день: {averageMood?.toFixed(1)}</p>
+				</Flex>
+			) : null}
 		</div>
 	);
 }

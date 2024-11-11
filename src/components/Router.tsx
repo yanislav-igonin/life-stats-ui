@@ -10,6 +10,8 @@ import {
 	Route,
 } from "react-router-dom";
 import { Layout } from "./Layout";
+import { BoozeList } from "@/pages/BoozeList";
+import { BoozeForm } from "@/pages/BoozeForm";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -18,6 +20,10 @@ const router = createBrowserRouter(
 				<Route path="sleep">
 					<Route path="list" element={<SleepList />} />
 					<Route path=":id" element={<SleepForm />} />
+				</Route>
+				<Route path="booze">
+					<Route path="list" element={<BoozeList />} />
+					<Route path=":id" element={<BoozeForm />} />
 				</Route>
 			</Route>
 			<Route path="/auth/:authToken" element={<Auth />} />

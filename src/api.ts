@@ -1,6 +1,7 @@
 import { httpClient, httpClientUnauthed } from "./httpClient";
 import { subWeeks } from "date-fns";
 import type { Sleep } from "./models/sleep.model";
+import { BoozeListElement } from "./models/booze.model";
 
 type SuccessResponse<T> = {
 	data: T;
@@ -65,6 +66,53 @@ export function saveSleep(sleep: Sleep) {
 	};
 	return httpClient
 		.post<SuccessResponse<SleepData>>("sleep/save", {
+			json: body,
+		})
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export type BoozeData = {
+	id: number;
+	createdAt: string;
+	quantity: "low" | "medium" | "high";
+};
+export function getBoozes(dates: DateRange | undefined) {
+	const fromDate =
+		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
+	const toDate = dates?.to?.toISOString() ?? new Date().toISOString();
+	return httpClient
+		.get<SuccessResponse<BoozeData[]>>("booze/list", {
+			searchParams: {
+				from: fromDate,
+				to: toDate,
+			},
+		})
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data.map((data) => new BoozeListElement(data));
+		});
+}
+
+export function getBooze(id: number) {
+	return httpClient
+		.get<SuccessResponse<BoozeData>>(`booze/${id}`)
+		.then(async (response) => {
+			const data = await response.json();
+			return data.data;
+		});
+}
+
+export function saveBooze(booze: BoozeData) {
+	const body = {
+		id: booze.id,
+		createdAt: booze.createdAt,
+		quantity: booze.quantity,
+	};
+	return httpClient
+		.post<SuccessResponse<BoozeData>>("booze/save", {
 			json: body,
 		})
 		.then(async (response) => {
