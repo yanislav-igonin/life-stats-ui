@@ -10,7 +10,7 @@ const series: BarChartSeries[] = [
 	{
 		label: "Количество",
 		name: "quantityNumber",
-		color: "red",
+		color: "black",
 	},
 ];
 
