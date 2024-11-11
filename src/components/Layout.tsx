@@ -4,7 +4,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
-const navLinks = [{ label: "Сон", href: "/sleep/list" }];
+const navLinks = [
+	{ label: "Сон", href: "/sleep/list" },
+	{ label: "Бухло", href: "/booze/list" }, 
+];
 
 export function Layout() {
 	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();

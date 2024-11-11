@@ -39,6 +39,10 @@ export class Booze {
 		return this.quantityMap[this.quantity];
 	}
 
+	get quantityEmoji() {
+		return this.quantityEmojiMap[this.quantity];
+	}
+
 	static getAverageQuantity(boozes: Booze[]) {
 		const total = boozes.reduce((acc, booze) => acc + booze.quantityNumber, 0);
 		return total / boozes.length;

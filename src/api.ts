@@ -1,6 +1,7 @@
 import { httpClient, httpClientUnauthed } from "./httpClient";
 import { subWeeks } from "date-fns";
 import type { Sleep } from "./models/sleep.model";
+import { Booze } from "./models/booze.model";
 
 type SuccessResponse<T> = {
 	data: T;
@@ -76,9 +77,8 @@ export function saveSleep(sleep: Sleep) {
 export type BoozeData = {
 	id: string;
 	createdAt: string;
-	quantity: number;
+	quantity: "low" | "medium" | "high";
 };
-
 export function getBoozes(dates: DateRange | undefined) {
 	const fromDate =
 		dates?.from?.toISOString() ?? subWeeks(new Date(), 2).toISOString();
@@ -92,7 +92,7 @@ export function getBoozes(dates: DateRange | undefined) {
 		})
 		.then(async (response) => {
 			const data = await response.json();
-			return data.data;
+			return data.data.map((data) => new Booze(data));
 		});
 }
 
